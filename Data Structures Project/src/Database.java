@@ -10,10 +10,16 @@ public class Database {
     HashMap<String, ProductJeans> jeansMap;
 //    HashMap<String, ProductTShirt> shirtMap;
 
-    //Constructor. Can implement either using internal methods to instantiate lists and maps or take in arrays
+    //No-args constructor. Initializes the database with 10000 items each
     public Database()
     {
         initializeJeans(10000);
+    }
+
+    public Database(int jeansNum, int shirtNum)
+    {
+        initializeJeans(jeansNum);
+        //initializeShirts(shirtNum)
     }
 
     public void initializeJeans(int numJeans)
@@ -27,7 +33,7 @@ public class Database {
         }
 
         //Initial capacity is set to jeans * 2 to avoid collisions. Uses extra space but will be faster
-        jeansMap = new HashMap<>(jeans.size());
+        jeansMap = new HashMap<>(jeans.size() * 2);
 
         for (ProductJeans j : jeans)
         {
@@ -40,9 +46,11 @@ public class Database {
 
     public ProductJeans searchJeans(String name)
     {
-        ProductJeans temp = jeansMap.getOrDefault(name, null);
-        if (temp != null)
-            return temp;
+        if (jeansMap.containsKey(name))
+        {
+            return jeansMap.get(name);
+        }
+
         System.out.println("This item does not exist");
         return null;
     }
