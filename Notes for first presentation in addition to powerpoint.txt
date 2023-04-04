@@ -1,0 +1,3 @@
+Notes for presentation 1:
+
+The reason for the O(1) time for inserting, deleting is because theoretically we would already have a reference to the product we want to delete, so there will be no traversal time for the linked list. Hashmap gives theoretical O(1) search time, and which should make up for the issue of not having indexes in a linked list. 

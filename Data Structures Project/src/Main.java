@@ -3,40 +3,50 @@ public class Main {
     public static void main(String[] args) {
         Database products = new Database();
 
+        //Testing using both a hashmap and a linked list-------------------------------------------
+
         //For some reason, the first search of Jeans takes longer
-        double startTime = System.currentTimeMillis();
-        System.out.println(products.searchJeans("Jeans500"));
-        System.out.println(System.currentTimeMillis() - startTime);
+        double startTime = System.nanoTime();
+        System.out.println("Search by name: " + products.searchJeans("Jeans500"));
+        System.out.println(System.nanoTime() - startTime);
 
-        startTime = System.currentTimeMillis();
-        System.out.println(products.searchJeans("Jeans900"));
-        System.out.println(System.currentTimeMillis() - startTime);
+         startTime = System.nanoTime();
+        System.out.println("Search by name: " + products.searchJeans("Jeans500"));
+        System.out.println(System.nanoTime() - startTime);
 
-         startTime = System.currentTimeMillis();
-        System.out.println(products.searchJeans("Jeans500"));
-        System.out.println(System.currentTimeMillis() - startTime);
-
-        startTime = System.currentTimeMillis();
-        System.out.println(products.getJeans(500));
-        System.out.println(System.currentTimeMillis() - startTime);
+        startTime = System.nanoTime();
+        System.out.println("Search by index: " + products.getJeans(500));
+        System.out.println(System.nanoTime() - startTime);
 
 
-        startTime = System.currentTimeMillis();
-        System.out.println(products.searchJeans("Jeans5000"));
-        System.out.println(System.currentTimeMillis() - startTime);
+        startTime = System.nanoTime();
+        System.out.println("Search by name: " + products.searchJeans("Jeans5000"));
+        System.out.println(System.nanoTime() - startTime);
 
-        startTime = System.currentTimeMillis();
-        System.out.println(products.getJeans(5000));
-        System.out.println(System.currentTimeMillis() - startTime);
+        startTime = System.nanoTime();
+        System.out.println("Search by index: " + products.getJeans(5000));
+        System.out.println(System.nanoTime() - startTime);
 
 
-        startTime = System.currentTimeMillis();
-        System.out.println(products.searchJeans("Jeans9999"));
-        System.out.println(System.currentTimeMillis() - startTime);
+        startTime = System.nanoTime();
+        System.out.println("Search by name: " + products.searchJeans("Jeans9999"));
+        System.out.println(System.nanoTime() - startTime);
 
-        startTime = System.currentTimeMillis();
-        System.out.println(products.getJeans(9999));
-        System.out.println(System.currentTimeMillis() - startTime);
+        startTime = System.nanoTime();
+        System.out.println("Search by index: " + products.getJeans(9999));
+        System.out.println(System.nanoTime() - startTime);
+
+        //Testing using the Linked HashMap-------------------------------------------
+
+
+        startTime = System.nanoTime();
+        System.out.println("Search by name: " + products.searchJeansLM("Jeans9999"));
+        System.out.println(System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
+        System.out.println("Search by index: " + products.getJeansLM(9999));
+        System.out.println(System.nanoTime() - startTime);
+
     }
 
 }

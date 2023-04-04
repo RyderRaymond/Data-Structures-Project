@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Date;
+import java.util.*;
 
 public class Database {
     LinkedList<ProductJeans> jeans;
@@ -10,13 +7,15 @@ public class Database {
     HashMap<String, ProductJeans> jeansMap;
 //    HashMap<String, ProductTShirt> shirtMap;
 
-    //No-args constructor. Initializes the database with 10000 items each
+    LinkedHashMap<String, ProductJeans> jeansLM;
+
+    //No-argument constructor. Initializes the database with 10000 items each
     public Database()
     {
         initializeJeans(10000);
     }
 
-    public Database(int jeansNum, int shirtNum)
+    public Database(int jeansNum)
     {
         initializeJeans(jeansNum);
         //initializeShirts(shirtNum)
@@ -35,14 +34,15 @@ public class Database {
         //Initial capacity is set to jeans * 2 to avoid collisions. Uses extra space but will be faster
         jeansMap = new HashMap<>(jeans.size() * 2);
 
+        jeansLM = new LinkedHashMap<>(numJeans);
+
         for (ProductJeans j : jeans)
         {
             jeansMap.put(j.getTitle(), j);
+            jeansLM.put(j.getTitle(), j);
         }
+
     }
-
-//    public void initializeShirts()
-
 
     public ProductJeans searchJeans(String name)
     {
@@ -58,5 +58,27 @@ public class Database {
     public ProductJeans getJeans(int position)
     {
         return jeans.get(position);
+    }
+
+    public ProductJeans searchJeansLM(String name)
+    {
+        if (jeansLM.containsKey(name))
+        {
+            return jeansLM.get(name);
+        }
+
+        System.out.println("This item does not exist");
+        return null;
+    }
+
+    //Linked Map does not have a method for
+    public ProductJeans getJeansLM(int position)
+    {
+        ProductJeans[] j = jeansLM.values().toArray(new ProductJeans[0]);
+
+        if (position < j.length)
+            return j[position];
+        System.out.println("The index is out of bounds");
+        return null;
     }
 }
