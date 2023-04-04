@@ -1,3 +1,8 @@
 Notes for presentation 1:
 
 The reason for the O(1) time for inserting, deleting is because theoretically we would already have a reference to the product we want to delete, so there will be no traversal time for the linked list. Hashmap gives theoretical O(1) search time, and which should make up for the issue of not having indexes in a linked list. 
+
+Remember that quicksort is faster than merge sort when everything is on the same disk. 
+Use multiple hashmaps for different types of searching. Drawback is that we could not have the same keys. 
+
+What we could do is save all the data to a text file if the user wants so they can reload it from storage after they close the program. (extra thing)
