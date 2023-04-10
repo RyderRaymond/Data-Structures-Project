@@ -1,0 +1,21 @@
+This is where we can write how we want to do this
+
+Plan:
+
+Have LinkedHashMaps for inserting, deleting, removing so it is O(1) time
+There is no way to sort this as a list
+
+Arrays for sorting so we can save the data in an order
+Bad for inserting and deleting (O(n)), but good for sorting
+Plan is to wait to update changes to the arrays until the user actually wants to sort items. Then fix them and once they are fixed ask how they want the items presented.
+This means technically inserting and deleting is O(1) time because that is easy for hashmaps but in the background will take O(n) when we fix the arrays
+
+
+Items of Clothing:
+jeans
+Tshirt
+shirt
+shorts
+hat
+shoes
+Jacket

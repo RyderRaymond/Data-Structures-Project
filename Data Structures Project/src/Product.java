@@ -8,9 +8,11 @@ public class Product {
     public enum ProductCategory {
         TShirt,
         Shirt,
-        Pant,
-        Jeans;
-        // add more if needed
+        Shorts,
+        Jeans,
+        Hat,
+        Shoes,
+        Jacket;
     }
 
     public Product(String title, double price, Date listingDate)

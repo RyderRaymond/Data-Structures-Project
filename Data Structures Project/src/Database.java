@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class Database {
+
+  //The Linked List and HashMap of jeans is for representation that the two take the same runtime except for searching for an index
     LinkedList<ProductJeans> jeans;
 //    LinkedList<ProductTShirt> shirts;
 
@@ -44,6 +46,7 @@ public class Database {
 
     }
 
+    //using HashMap
     public ProductJeans searchJeans(String name)
     {
         if (jeansMap.containsKey(name))
@@ -55,11 +58,13 @@ public class Database {
         return null;
     }
 
+    //using LinkedList
     public ProductJeans getJeans(int position)
     {
         return jeans.get(position);
     }
 
+    //using Linked Hashmap
     public ProductJeans searchJeansLM(String name)
     {
         if (jeansLM.containsKey(name))
