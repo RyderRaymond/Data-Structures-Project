@@ -11,6 +11,7 @@ Plan is to wait to update changes to the arrays until the user actually wants to
 This means technically inserting and deleting is O(1) time because that is easy for hashmaps but in the background will take O(n) when we fix the arrays
 
 
+
 Items of Clothing:
 jeans
 Tshirt
