@@ -60,6 +60,22 @@ public class Sorting {
         quickSort(list, left + 1, end, comparator);
     }
 
+    //Insertion sort just for comparing time complexity = O(n^2)
+    public static void insertionSortPrices(ArrayList<Product> list)
+    {
+        for (int i = 0; i < list.size() - 1; i++)
+        {
+            for (int j = i; j > 0; j--){
+                Product first = list.get(j);
+                Product second = list.get(j - 1);
+                if (first.getPrice() < second.getPrice()) break;
+                list.set(j, second);
+                list.set(j - 1, first);
+            }
+        }
+    }
+
+
     //Comparator for either date or price
     public static class ProductComparator implements Comparator<Product>
     {

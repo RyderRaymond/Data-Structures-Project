@@ -6,7 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="067d2246-6ce2-441e-84b5-102c9b9a1c8c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Database.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Database.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Sorting$ProductComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Sorting$ProductComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Sorting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Sorting.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Sorting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Sorting.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
