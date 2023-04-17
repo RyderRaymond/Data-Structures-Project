@@ -7,7 +7,11 @@ Class that handles all sorting
 public class Sorting {
     public static void quickSortByPrice(ArrayList<Product> list)
     {
-        quickSort(list, 0, list.size(), new ProductComparator("price"));
+        quickSort(list, 0, list.size() - 1, new ProductComparator("price"));
+    }
+    public static void quickSortByDate(ArrayList<Product> list)
+    {
+        quickSort(list, 0, list.size(), new ProductComparator("date"));
     }
 
     //quickSort to sort all of this list of items
@@ -17,13 +21,13 @@ public class Sorting {
 
         int left = start;
         int right = end - 1;
-        Product pivot = list.get(right);
+        Product pivot = list.get(end);
 
         while (left <= right)
         {
             while (left <= right && comparator.compare(list.get(left), pivot) <= 0) left++;
 
-            while (left <= right && comparator.compare(list.get(right), pivot) >= 0) right++;
+            while (left <= right && comparator.compare(list.get(right), pivot) >= 0) right--;
 
             if (left <= right){
                 Product temp = list.get(left);
@@ -35,7 +39,7 @@ public class Sorting {
         }
 
         Product temp = list.get(left);
-        list.set(left, pivot);
+        list.set(left, list.get(end));
         list.set(end, temp);  //sets the pivot to the left product
 
         quickSort(list, start, left - 1, comparator);

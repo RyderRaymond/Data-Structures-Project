@@ -16,25 +16,25 @@ public class Searching{
         LinkedHashMap<String, ? extends Product> productMap;
 
         switch (category) {
-            case JEANS:
+            case Jeans:
                 productMap = db.jeansMap;
                 break;
-            case SHIRT:
+            case Shirt:
                 productMap = db.shirtMap;
                 break;
-            case TSHIRT:
+            case TShirt:
                 productMap = db.tShirtMap;
                 break;
-            case SHORTS:
+            case Shorts:
                 productMap = db.shortsMap;
                 break;
-            case HAT:
+            case Hat:
                 productMap = db.hatMap;
                 break;
-            case SHOES:
+            case Shoes:
                 productMap = db.shoesMap;
                 break;
-            case JACKET:
+            case Jacket:
                 productMap = db.jacketMap;
                 break;
             default:
@@ -43,7 +43,7 @@ public class Searching{
 
         for (String key : productMap.keySet()) {
             Product product = productMap.get(key);
-            System.out.println(product.getTitle() + " - " + product.getPrice() + " - " + product.getDateAdded());
+            System.out.println(product.getTitle() + " - " + product.getPrice() + " - " + product.getListingDate());
         }
     }
 }

@@ -9,31 +9,31 @@ public class Database {
     //Products Hash Maps and ArrayLists (for sorting purposes)
     LinkedHashMap<String, ProductJeans> jeansMap;
     ArrayList<Product> jeansPrices;
-    ArrayList<ProductJeans> jeansDates;
+    ArrayList<Product> jeansDates;
 
     LinkedHashMap<String, ProductShirt> shirtMap;
-    ArrayList<ProductShirt> shirtPrices;
-    ArrayList<ProductShirt> shirtDates;
+    ArrayList<Product> shirtPrices;
+    ArrayList<Product> shirtDates;
 
     LinkedHashMap<String, ProductTShirt> tShirtMap;
-    ArrayList<ProductTShirt> tShirtPrices;
-    ArrayList<ProductTShirt> tShirtDates;
+    ArrayList<Product> tShirtPrices;
+    ArrayList<Product> tShirtDates;
 
     LinkedHashMap<String, ProductShorts> shortsMap;
-    ArrayList<ProductShorts> shortsPrices;
-    ArrayList<ProductShorts> shortsDates;
+    ArrayList<Product> shortsPrices;
+    ArrayList<Product> shortsDates;
 
     LinkedHashMap<String, ProductHat> hatMap;
-    ArrayList<ProductHat> hatPrices;
-    ArrayList<ProductHat> hatDates;
+    ArrayList<Product> hatPrices;
+    ArrayList<Product> hatDates;
 
     LinkedHashMap<String, ProductShoes> shoesMap;
-    ArrayList<ProductShoes> shoesPrices;
-    ArrayList<ProductShoes> shoesDates;
+    ArrayList<Product> shoesPrices;
+    ArrayList<Product> shoesDates;
 
     LinkedHashMap<String, ProductJacket> jacketMap;
-    ArrayList<ProductJacket> jacketPrices;
-    ArrayList<ProductJacket> jacketDates;
+    ArrayList<Product> jacketPrices;
+    ArrayList<Product> jacketDates;
 
 
     //No-argument constructor. Initializes the database with 10000 items each
@@ -230,29 +230,43 @@ public class Database {
         return null;
     }
 
-    public void sort(String productType, String dateOrPrice)
+    public void sortPrices(String productType)
     {
+        //Initializes as jeansPrices so java does not get mad that list may not be initialized
         ArrayList<Product> list = jeansPrices;
-//        switch(productType)
-//        {
-//            case "jeans":
-//                list = jeansPrices;
-//                break;
-//        }
+
+        switch(productType)
+        {
+            case "jeans":
+                list = jeansPrices;
+                break;
+            case "shirt":
+                list = shirtPrices;
+                break;
+            case "tshirt":
+                list = tShirtPrices;
+                break;
+            case "shorts":
+                list = shortsPrices;
+                break;
+            case "hat":
+                list = hatPrices;
+                break;
+            case "shoes":
+                list = shoesPrices;
+                break;
+            case "jacket":
+                list = jacketPrices;
+                break;
+        }
+
         Sorting.quickSortByPrice(list);
-        printAllPrices(list);
     }
 
-    public void printAllPrices(ArrayList<Product> list)
+    public void printAll(ArrayList<Product> list)
     {
         for (Product p : list){
-            System.out.println(p.getPrice());
-        }
-    }
-    public void printAllPrices()
-    {
-        for (Product p : jeansPrices){
-            System.out.println(p.getPrice());
+            System.out.println(p);
         }
     }
 
