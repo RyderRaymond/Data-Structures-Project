@@ -8,7 +8,7 @@ public class Database {
 
     //Products Hash Maps and ArrayLists (for sorting purposes)
     LinkedHashMap<String, ProductJeans> jeansMap;
-    ArrayList<ProductJeans> jeansPrices;
+    ArrayList<Product> jeansPrices;
     ArrayList<ProductJeans> jeansDates;
 
     LinkedHashMap<String, ProductShirt> shirtMap;
@@ -229,4 +229,32 @@ public class Database {
         System.out.println("The index is out of bounds");
         return null;
     }
+
+    public void sort(String productType, String dateOrPrice)
+    {
+        ArrayList<Product> list = jeansPrices;
+//        switch(productType)
+//        {
+//            case "jeans":
+//                list = jeansPrices;
+//                break;
+//        }
+        Sorting.quickSortByPrice(list);
+        printAllPrices(list);
+    }
+
+    public void printAllPrices(ArrayList<Product> list)
+    {
+        for (Product p : list){
+            System.out.println(p.getPrice());
+        }
+    }
+    public void printAllPrices()
+    {
+        for (Product p : jeansPrices){
+            System.out.println(p.getPrice());
+        }
+    }
+
+
 }

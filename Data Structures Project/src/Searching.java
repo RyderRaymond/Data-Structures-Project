@@ -12,7 +12,7 @@ public class Searching{
         this.db = db;
     }
 
-    public void searchAllItems(ProductCategory category) {
+    public void searchAllItems(Product.ProductCategory category) {
         LinkedHashMap<String, ? extends Product> productMap;
 
         switch (category) {

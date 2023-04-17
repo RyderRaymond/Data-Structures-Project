@@ -51,6 +51,13 @@ public class Main {
         System.out.println("Search by index: " + products.getJeans(9999));
         System.out.println(System.nanoTime() - startTime);
 
+
+        System.out.println("Sorting by Price----------------");
+        startTime = System.nanoTime();
+        products.sort("jeans", "price");
+        System.out.println("Time: " + (System.nanoTime() - startTime));
+        products.printAllPrices();
+
     }
 
 }
