@@ -38,7 +38,9 @@ public class Searching{
                 productMap = db.jacketMap;
                 break;
             default:
-                throw new IllegalArgumentException("Invalid category: " + category);
+                throw new IllegalArgumentException("Invalid Item: " + category);
+                category = DecisionHandler.getCategory("Searching");
+                searchAllItems(category);
         }
 
         for (String key : productMap.keySet()) {
