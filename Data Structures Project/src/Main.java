@@ -55,12 +55,12 @@ public class Main {
         startTime = System.nanoTime();
         products.sortPrices("jeans");
         double endTime = System.nanoTime();
-        products.printAll(products.jeansPrices);
+//        products.printAll(products.jeansPrices);
         System.out.println("Time for QuickSort O(n*log(n)) : " + (endTime - startTime));
 
         System.out.print("\nSorting by price using insertion sort O(n^2): ");
         startTime = System.nanoTime();
-        Sorting.insertionSortPrices(products.jeansPrices);
+       Sorting.insertionSortPrices(products.jeansPrices);
         endTime = System.nanoTime();
         System.out.println(endTime - startTime);
     }
