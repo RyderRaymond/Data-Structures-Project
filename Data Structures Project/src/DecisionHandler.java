@@ -6,7 +6,7 @@ public class DecisonHandler{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please choose a Item for" + task + ":");
         String category = scanner.nextLine();
-        category = category.toUpperCase();
+        category = category.toLowerCase();
         return category;
     }
 
