@@ -2,7 +2,7 @@
 import java.util.Date;
 public class ProductShoes extends Product {
 
-    ProductCategory category = ProductCategory.TShirt;
+    ProductCategory category = ProductCategory.Shoes;
 
     public ProductShoes(String title, double price, Date date)
     {
