@@ -20,3 +20,17 @@ shorts
 hat
 shoes
 Jacket
+
+
+done:
+searching
+sorting
+inserting
+
+to do:
+deleting
+input
+making more realistic
+bonus
+printing items
+

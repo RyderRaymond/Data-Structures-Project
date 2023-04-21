@@ -35,6 +35,9 @@ public class Database {
     ArrayList<Product> jacketPrices;
     ArrayList<Product> jacketDates;
 
+    LinkedList<Product> toBeDeleted;
+    LinkedList<Product> toBeAdded;
+
 
     //No-argument constructor. Initializes the database with 10000 items each
     public Database() {
@@ -47,6 +50,9 @@ public class Database {
         initializeHats(NUM);
         initializeShoes(NUM);
         initializeJackets(NUM);
+
+        toBeDeleted = new LinkedList<Product>();
+        toBeAdded = new LinkedList<Product>();
     }
 
     //Constructor that allows for manual numbers of items
@@ -269,6 +275,41 @@ public class Database {
         }
 
         Sorting.quickSortByDate(list);
+    }
+
+    public void insert(Product p)
+    {
+      HashMap<Product> map;
+      String title = p.getTitle();
+        switch (p.category)
+          {
+            case p.category == Product.ProductCategory.Jeans:
+              map = jeansMap;
+              break;
+            case p.category == Product.ProductCategory.Shirt:
+              map = shirtMap;
+              break;
+            case p.category == Product.ProductCategory.TShirt;
+              map = tShirtMap;
+              break;
+            case p.category == Product.ProductCategory.Shorts:
+              map = shortsMap;
+              break;
+            case p.category == Product.ProductCategory.Hat:
+              map = hatMap;
+              break;
+            case p.category == Product.ProductCategory.Shoes;
+              map = shoesMap;
+              break;
+            case p.category == Product.ProductCategory.Jacket;
+              map = shoesMap;
+              break;
+            default:
+              throw new IllegalArgumentException("The product category was not found; nothing was added");
+            }
+
+      map.put(title, product);
+      toBeAdded.add(p);
     }
 
     //Prints all products in this list
