@@ -28,9 +28,9 @@ sorting
 inserting
 
 to do:
-deleting
+deleting (Doyle)
 input
-making more realistic
+making more realistic (Doyle)
 bonus
 printing items
 

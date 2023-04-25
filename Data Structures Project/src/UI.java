@@ -14,6 +14,7 @@ public class UI
 
   public static boolean getInput()
   {
+    Scanner scanner = new Scanner(System.in);
     String[] options = 
     {"Search", "Insert", "Delete", "Sort", "Print"};
 
@@ -22,13 +23,17 @@ public class UI
     System.out.println();
     System.out.print("What would you like to do?: ");
 
-    String choice = Scanner.nextLine();
+    String choice = scanner.nextLine();
 
     choice = DecisionHandler.handleDecisions(choice, options);
 
     switch(choice)
     {
       case "Search":
+      case "Insert":
+      case "Delete":
+      case "Sort":
+      case "Print":
           
     }
 
