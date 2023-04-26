@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -50,5 +51,24 @@ public class DecisionHandler{
         }
         return decision;
     }
+
+    public static String getArrayContents(String[] valid)
+    {
+        String result = "";
+
+        for (String option : valid) result += option + ", ";
+
+        return result;
+    }
+
+    public static String getArrayContents(Set<String> valid)
+    {
+        String result = "";
+
+        for (String option : valid) result += option + ", ";
+
+        return result;
+    }
+
 
 }
