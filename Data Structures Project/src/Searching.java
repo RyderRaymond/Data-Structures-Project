@@ -19,25 +19,25 @@ public class Searching{
 
         // Switch statement to determine which category of products to search.
         switch (category) {
-            case jeans:
+            case Jeans:
                 productMap = db.jeansMap;
                 break;
-            case shirt:
+            case Shirt:
                 productMap = db.shirtMap;
                 break;
-            case tshirt:
+            case TShirt:
                 productMap = db.tShirtMap;
                 break;
-            case shorts:
+            case Shorts:
                 productMap = db.shortsMap;
                 break;
-            case hat:
+            case Hat:
                 productMap = db.hatMap;
                 break;
-            case shoes:
+            case Shoes:
                 productMap = db.shoesMap;
                 break;
-            case jacket:
+            case Jacket:
                 productMap = db.jacketMap;
                 break;
             default:
