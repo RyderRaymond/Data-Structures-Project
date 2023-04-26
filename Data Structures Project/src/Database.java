@@ -289,7 +289,7 @@ public class Database {
             case p.category == Product.ProductCategory.Shirt:
               map = shirtMap;
               break;
-            case p.category == Product.ProductCategory.TShirt;
+            case p.category == Product.ProductCategory.TShirt:
               map = tShirtMap;
               break;
             case p.category == Product.ProductCategory.Shorts:
@@ -298,10 +298,10 @@ public class Database {
             case p.category == Product.ProductCategory.Hat:
               map = hatMap;
               break;
-            case p.category == Product.ProductCategory.Shoes;
+            case p.category == Product.ProductCategory.Shoes:
               map = shoesMap;
               break;
-            case p.category == Product.ProductCategory.Jacket;
+            case p.category == Product.ProductCategory.Jacket:
               map = shoesMap;
               break;
             default:
