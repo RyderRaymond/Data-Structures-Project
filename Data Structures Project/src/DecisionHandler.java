@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Set;
 
 public class DecisonHandler{
     //
@@ -23,7 +24,25 @@ public class DecisonHandler{
         valid.add(s);
       }
 
+    if (decision.equals("")) decision = keyboard.nextLine();
+
     while(!valid.contains(decision))
+      {
+        System.out.print("That was not a valid decision." +
+                          "\nInput a valid decision: " + getArrayContents(validDecisions));
+        decision = keyboard.nextLine();
+      }
+    return decision;
+  }
+
+    //method for handeling a question that has a decison based from an array like their backpack and ext.
+  public static String handleDecisions(String decision, Set<String> validDecisions)
+  {
+    Scanner keyboard = new Scanner(System.in);
+
+    if (decision.equals("")) decision = keyboard.nextLine();
+
+    while(!validDecisions.contains(decision))
       {
         System.out.print("That was not a valid decision." +
                           "\nInput a valid decision: " + getArrayContents(validDecisions));

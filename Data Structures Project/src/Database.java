@@ -7,31 +7,31 @@ public class Database {
     HashMap<String, ProductJeans> jeansHM;
 
     //Products Hash Maps and ArrayLists (for sorting purposes)
-    LinkedHashMap<String, ProductJeans> jeansMap;
+    LinkedHashMap<String, Product> jeansMap;
     ArrayList<Product> jeansPrices;
     ArrayList<Product> jeansDates;
 
-    LinkedHashMap<String, ProductShirt> shirtMap;
+    LinkedHashMap<String, Product> shirtMap;
     ArrayList<Product> shirtPrices;
     ArrayList<Product> shirtDates;
 
-    LinkedHashMap<String, ProductTShirt> tShirtMap;
+    LinkedHashMap<String, Product> tShirtMap;
     ArrayList<Product> tShirtPrices;
     ArrayList<Product> tShirtDates;
 
-    LinkedHashMap<String, ProductShorts> shortsMap;
+    LinkedHashMap<String, Product> shortsMap;
     ArrayList<Product> shortsPrices;
     ArrayList<Product> shortsDates;
 
-    LinkedHashMap<String, ProductHat> hatMap;
+    LinkedHashMap<String, Product> hatMap;
     ArrayList<Product> hatPrices;
     ArrayList<Product> hatDates;
 
-    LinkedHashMap<String, ProductShoes> shoesMap;
+    LinkedHashMap<String, Product> shoesMap;
     ArrayList<Product> shoesPrices;
     ArrayList<Product> shoesDates;
 
-    LinkedHashMap<String, ProductJacket> jacketMap;
+    LinkedHashMap<String, Product> jacketMap;
     ArrayList<Product> jacketPrices;
     ArrayList<Product> jacketDates;
 
@@ -216,6 +216,51 @@ public class Database {
     //Sorts this product by prices using quicksort
     public void sortPrices(String productType) {
         //Initializes as jeansPrices so java does not get mad that list may not be initialized
+        ArrayList<Product> list = getPricesList(productType)
+
+        Sorting.quickSortByPrice(list);
+    }
+
+    //sorts this product by date using quicksort
+    public void sortDates(String productType) {
+        ArrayList<Product> list = getDatesList(productType);
+
+        Sorting.quickSortByDate(list);
+    }
+
+  //syncs the hashmaps to the arraylists (hashmaps are already up to date)
+  public void sync()
+  {
+    ArrayList<Product> prices;
+    ArrayList<Product> dates;
+
+    //adding must be put first in case the user added and deleted the same item multiple times
+    //putting deleting first may result in trying to delete the same item twice when it appears once
+    for (Product p : toBeAdded)
+      {
+        prices = getPricesList(p);
+        dates = getDatesList(p);
+        Inserting.insertNewByPrice(p, prices);
+        Inserting.insertNewByDate(p, dates);
+      }
+    
+    for (Product p : toBeDeleted)
+      {
+        prices = getPricesList(p);
+        dates = getDatesList(p);
+        prices.remove(p);
+        dates.remove(p);
+      }
+
+    //clear the lists becasue everything is up to date
+    toBeAdded = new LinkedList<Product>();
+    toBeDeleted = new LinkedList<Product>();
+  }
+
+  //returns the list of this product category sorted by price
+  public ArrayList<Product> getPricesList(String productType)
+  {        
+    //Initializes as jeansPrices so java does not get mad that list may not be initialized
         ArrayList<Product> list = jeansPrices;
 
         switch (productType) {
@@ -242,12 +287,80 @@ public class Database {
                 break;
         }
 
-        Sorting.quickSortByPrice(list);
-    }
+      return list;
+  }
 
-    //sorts this product by date using quicksort
-    public void sortDates(String productType) {
-        //Initializes as jeansPrices so java does not get mad that list may not be initialized
+  //returns the list of this product category sorted by price
+    public ArrayList<Product> getPricesList(Product p)
+  {        
+    //Initializes as jeansPrices so java does not get mad that list may not be initialized
+        ArrayList<Product> list = jeansPrices;
+
+        switch (p.category) {
+            case Jeans:
+                list = jeansPrices;
+                break;
+            case Shirt:
+                list = shirtPrices;
+                break;
+            case TShirt:
+                list = tShirtPrices;
+                break;
+            case Shorts:
+                list = shortsPrices;
+                break;
+            case Hat:
+                list = hatPrices;
+                break;
+            case Shoes:
+                list = shoesPrices;
+                break;
+            case Jacket:
+                list = jacketPrices;
+                break;
+        }
+
+      return list;
+  }
+
+  //returns the list of this product category sorted by date
+      public ArrayList<Product> getDatesList(Product p)
+  {        
+    //Initializes as jeansPrices so java does not get mad that list may not be initialized
+        ArrayList<Product> list = jeansDates;
+
+        switch (p.category) {
+            case Jeans:
+                list = jeansDates;
+                break;
+            case Shirt:
+                list = shirtDates;
+                break;
+            case TShirt:
+                list = tShirtDates;
+                break;
+            case Shorts:
+                list = shortsDates;
+                break;
+            case Hat:
+                list = hatDates;
+                break;
+            case Shoes:
+                list = shoesDates;
+                break;
+            case Jacket:
+                list = jacketDates;
+                break;
+        }
+
+      return list;
+  }
+
+
+  //returns the list of this product's category sorted by date
+        public ArrayList<Product> getDatesList(String productType)
+  {        
+    //Initializes as jeansPrices so java does not get mad that list may not be initialized
         ArrayList<Product> list = jeansDates;
 
         switch (productType) {
@@ -274,43 +387,43 @@ public class Database {
                 break;
         }
 
-        Sorting.quickSortByDate(list);
-    }
+      return list;
+  }
 
-    public void insert(Product p)
-    {
-      HashMap<Product> map;
-      String title = p.getTitle();
+  //returns LinkedHashMap that this product's product category uses
+  public LinkedHashMap<String, Product> getProductMap(Product p)
+  {
+    LinkedHashMap<String, Product> map;
         switch (p.category)
           {
             case p.category == Product.ProductCategory.Jeans:
-              map = jeansMap;
+              map = db.jeansMap;
               break;
             case p.category == Product.ProductCategory.Shirt:
-              map = shirtMap;
+              map = db.shirtMap;
               break;
             case p.category == Product.ProductCategory.TShirt:
-              map = tShirtMap;
+              map = db.tShirtMap;
               break;
             case p.category == Product.ProductCategory.Shorts:
-              map = shortsMap;
+              map = db.shortsMap;
               break;
             case p.category == Product.ProductCategory.Hat:
-              map = hatMap;
+              map = db.hatMap;
               break;
             case p.category == Product.ProductCategory.Shoes:
-              map = shoesMap;
+              map = db.shoesMap;
               break;
             case p.category == Product.ProductCategory.Jacket:
-              map = shoesMap;
+              map = db.shoesMap;
               break;
             default:
-              throw new IllegalArgumentException("The product category was not found; nothing was added");
+              throw new IllegalArgumentException("The product category was not found");
             }
 
-      map.put(title, product);
-      toBeAdded.add(p);
-    }
+    return map;
+  }
+
 
     //Prints all products in this list
     public void printAll(ArrayList<Product> list) {

@@ -26,8 +26,9 @@ done:
 searching
 sorting
 inserting
+
 making more realistic (Doyle) (add it so that it gens dates from past 2 years and prices from a select for each item)
-deleting (Doyle)
+deleting (Doyle) (just basically copy inserting)
 
 
 
