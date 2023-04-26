@@ -3,8 +3,6 @@ import java.util.Date;
 import java.util.Random;
 
 public class ProductJeans extends Product {
-    ProductCategory category = ProductCategory.Jeans;
-
 
     public ProductJeans(String title, double price, Date date)
     {
@@ -32,17 +30,17 @@ public class ProductJeans extends Product {
       //           break;
       //   }
         
-        super(title, price, date);
+        super(title, price, date, ProductCategory.Jeans);
     }
 
-    public static void main(String[] args) {
-      jeansLL = new LinkedList<>();
-        for (int i = 0; i < numJeans; i++) {
-            jeansLL.add(new ProductJeans("Jeans" + i, random.nextDouble(15, 50), new Date()));
-        }
-        System.out.print(jeansLL);
-
-    }
+//    public static void main(String[] args) {
+//      jeansLL = new LinkedList<>();
+//        for (int i = 0; i < numJeans; i++) {
+//            jeansLL.add(new ProductJeans("Jeans" + i, random.nextDouble(15, 50), new Date()));
+//        }
+//        System.out.print(jeansLL);
+//
+//    }
   
 
 }

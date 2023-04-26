@@ -6,11 +6,38 @@ public class DecisionHandler{
     //
     public static Product.ProductCategory getCategory (String task){
         Scanner scanner = new Scanner(System.in);
-        categoryType();
-        System.out.println("Please choose a proper Item for" + task + ":");
+//        categoryType();
+        System.out.println("Please choose a proper Item for " + task + ":");
         String category = scanner.nextLine();
         category = category.toLowerCase();
-        return category;
+
+        switch(category)
+        {
+            case "jeans":
+                return Product.ProductCategory.Jeans;
+                break;
+            case "hat":
+                return Product.ProductCategory.Hat;
+                break;
+            case "jacket":
+                return Product.ProductCategory.Jacket;
+                break;
+            case "shirt":
+                return Product.ProductCategory.Shirt;
+                break;
+            case "tshirt":
+                return Product.ProductCategory.TShirt;
+                break;
+            case "shoes":
+                return Product.ProductCategory.Shoes;
+                break;
+            case "shorts":
+                return Product.ProductCategory.Shorts;
+                break;
+            default:
+                System.out.println("That was not a valid category");
+                return getCategory(task);
+        }
     }
 
 

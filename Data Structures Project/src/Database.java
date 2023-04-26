@@ -396,26 +396,26 @@ public class Database {
     LinkedHashMap<String, Product> map;
         switch (p.category)
           {
-            case p.category == Product.ProductCategory.Jeans:
-              map = db.jeansMap;
+            case Jeans:
+              map = jeansMap;
               break;
-            case p.category == Product.ProductCategory.Shirt:
-              map = db.shirtMap;
+            case Shirt:
+              map = shirtMap;
               break;
-            case p.category == Product.ProductCategory.TShirt:
-              map = db.tShirtMap;
+            case TShirt:
+              map = tShirtMap;
               break;
-            case p.category == Product.ProductCategory.Shorts:
-              map = db.shortsMap;
+            case Shorts:
+              map = shortsMap;
               break;
-            case p.category == Product.ProductCategory.Hat:
-              map = db.hatMap;
+            case Hat:
+              map = hatMap;
               break;
-            case p.category == Product.ProductCategory.Shoes:
-              map = db.shoesMap;
+            case Shoes:
+              map = shoesMap;
               break;
-            case p.category == Product.ProductCategory.Jacket:
-              map = db.shoesMap;
+            case Jacket:
+              map = jacketMap;
               break;
             default:
               throw new IllegalArgumentException("The product category was not found");
@@ -423,6 +423,40 @@ public class Database {
 
     return map;
   }
+
+    //returns LinkedHashMap that this product's product category uses
+    public LinkedHashMap<String, Product> getProductMap(Product.ProductCategory category)
+    {
+        LinkedHashMap<String, Product> map;
+        switch (category)
+        {
+            case Jeans:
+                map = jeansMap;
+                break;
+            case Shirt:
+                map = shirtMap;
+                break;
+            case TShirt:
+                map = tShirtMap;
+                break;
+            case Shorts:
+                map = shortsMap;
+                break;
+            case Hat:
+                map = hatMap;
+                break;
+            case Shoes:
+                map = shoesMap;
+                break;
+            case Jacket:
+                map = jacketMap;
+                break;
+            default:
+                throw new IllegalArgumentException("The product category was not found");
+        }
+
+        return map;
+    }
 
 
     //Prints all products in this list

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashMap;
 
 public class Inserting
@@ -6,7 +8,7 @@ public class Inserting
     {
       LinkedHashMap<String, Product> map = db.getProductMap(p);
       String title = p.getTitle();
-      map.put(title, product);
+      map.put(title, p);
       db.toBeAdded.add(p);
     }
 

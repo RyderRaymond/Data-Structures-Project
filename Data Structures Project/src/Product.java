@@ -4,6 +4,7 @@ public class Product {
     public double price; // price of the product
     public String title; // title of the product
     public Date listingDate; // when the product first brought to the inventory
+    public ProductCategory category; //the category of this product
 
     public enum ProductCategory {
         TShirt,
@@ -15,11 +16,12 @@ public class Product {
         Jacket;
     }
 
-    public Product(String title, double price, Date listingDate)
+    public Product(String title, double price, Date listingDate, ProductCategory category)
     {
         this.title = title;
         this.price = price;
         this.listingDate = listingDate;
+        this.category = category;
     }
 
     public String getTitle()

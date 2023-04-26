@@ -2,11 +2,9 @@
 import java.util.Date;
 public class ProductShorts extends Product {
 
-    ProductCategory category = ProductCategory.Shorts;
-
     public ProductShorts(String title, double price, Date date)
     {
-        super(title, price, date);
+        super(title, price, date, ProductCategory.Shorts);
     }
 
 

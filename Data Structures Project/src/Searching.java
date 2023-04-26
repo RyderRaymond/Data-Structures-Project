@@ -11,6 +11,18 @@ public class Searching{
         this.db = db;
     }
 
+    public Product searchByTitle(Product.ProductCategory category, String title)
+    {
+        LinkedHashMap<String, Product> map = db.getProductMap(category);
+
+        if (map.containsKey(title))
+            return map.get(title);
+
+        System.out.println("There is no product with the title: " + title);
+        return null;
+    }
+
+
     // The searchAllItems method searches and displays all items of a given category.
     public String searchAllItems(Product.ProductCategory category) {
         // LinkedHashMap is a hash table implementation with predictable iteration order.
@@ -43,7 +55,7 @@ public class Searching{
             default:
                 // Use the DecisionHandler class to get a valid category input.
                 category = DecisionHandler.getCategory("Searching");
-                return searchAllItems(Product.ProductCategory.valueOf(category));
+                return searchAllItems(category);
         }
 
         // Iterate through the productMap and display the product details.
@@ -66,30 +78,30 @@ public class Searching{
         LinkedHashMap<String, ? extends Product> productMap;
 
         switch (category) {
-            case jeans:
+            case Jeans:
                 productMap = db.jeansMap;
                 break;
-            case shirt:
+            case Shirt:
                 productMap = db.shirtMap;
                 break;
-            case tshirt:
+            case TShirt:
                 productMap = db.tShirtMap;
                 break;
-            case shorts:
+            case Shorts:
                 productMap = db.shortsMap;
                 break;
-            case hat:
+            case Hat:
                 productMap = db.hatMap;
                 break;
-            case shoes:
+            case Shoes:
                 productMap = db.shoesMap;
                 break;
-            case jacket:
+            case Jacket:
                 productMap = db.jacketMap;
                 break;
             default:
                 // Use the DecisionHandler class to get a valid category input.
-                category = Product.ProductCategory.valueOf(DecisionHandler.getCategory("Searching"));
+                category = DecisionHandler.getCategory("Searching");
                 searchPriceRange(category, maxPrice, minPrice);
                 return;
         }
