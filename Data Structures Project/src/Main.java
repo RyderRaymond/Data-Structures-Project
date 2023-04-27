@@ -1,6 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
+        /* 
         double s = System.nanoTime();
         Database products = new Database();
         System.out.println("Initializing the Database: " + (System.nanoTime() - s));
@@ -63,7 +64,8 @@ public class Main {
        Sorting.insertionSortPrices(products.jeansPrices);
         endTime = System.nanoTime();
         System.out.println(endTime - startTime);
-
+        */
+        
         UI ui = new UI();
         ui.runDatabase();
     }

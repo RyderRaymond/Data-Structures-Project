@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class UI
@@ -28,6 +29,7 @@ public class UI
 
   public static boolean master()
   {
+    Introduction();
     Scanner scanner = new Scanner(System.in);
 
     String[] options =
@@ -57,8 +59,11 @@ public class UI
         case "Search":
           currentSelection = search();
         case "Insert":
+          currentSelection = insert();
         case "Delete":
         case "Sort":
+          currentSelection = Sort();
+
         case "Print":
 
       }
@@ -68,8 +73,6 @@ public class UI
   public static Product search()
   {
     System.out.println("You are now searching.");
-    String choice;
-    Scanner scanner = new Scanner(System.in);
 
     HashMap<String, String> commands = new HashMap<String, String>();
     commands.put("Exit", "returns to the selection screen");
@@ -79,34 +82,48 @@ public class UI
 
     System.out.println("----------------------------------------------------------");
     System.out.println("Possible commands are: ");
-  for (String command : commands.keySet())
-    {
-      System.out.println(command + ": " + commands.get(command));
-    }
+    for (String command : commands.keySet())
+      {
+        System.out.println(command + ": " + commands.get(command));
+      }
 
     System.out.println("----------------------------------------------------------");
+    Scanner keyboard = new Scanner(System.in);
     System.out.println("Your Command: ");
-    choice = scanner.nextLine();
-    choice = DecisionHandler.handleDecisions(choice, commands.keySet());
-
-    switch(choice) {
-      case "Exit":
-        return null;
-//          break;
-      case "Title":
-        return searchByTitle();
-      case "Range":
-        return searchByRange();
-
+    String choice;
+    try{
+      choice = keyboard.next();
+      choice = DecisionHandler.handleDecisions(choice, commands.keySet());
+      switch(choice) {
+        case "Exit":
+          return null;
+  //          break;
+        case "Title":
+          return searchByTitle();
+        case "Range":
+          return searchByRange();
+  
+      }
+    }catch (NoSuchElementException e){
+      System.out.println("You have entered an invalid command(SOMETHIG WENT WRONG).");
     }
+
+    
     return null;
 
   }
 
   public static Product searchByTitle()
   {
-    System.out.print("Enter the category of the product you would like to search for: ");
-    String category = DecisionHandler.handleDecisions("", new String[] {"Jeans", "Hat", "Jacket", "Shirt", "TShirt", "Shorts", "Shoes"});
+    Database db = new Database(); // Creating a new database object.
+    Searching searching = new Searching(db); // Passing the database object to the constructor.
+    DecisionHandler decisionHandler = new DecisionHandler();
+    Product.ProductCategory catigory = decisionHandler.getCategory("searching");
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Enter the title of the product from the category you wish to search for: ");
+    String title = scanner.nextLine();
+    searching.searchByTitle(catigory,title);
+
     return null; //temporary
   }
 
@@ -115,8 +132,6 @@ public class UI
     Searching searching = new Searching(db); // Passing the database object to the constructor.
     DecisionHandler decisionHandler = new DecisionHandler();
     Scanner scanner = new Scanner(System.in);
-    // System.out.print("Enter the product you would like to search for: ");
-    // String catigory = scanner.nextLine();
     Product.ProductCategory catigory = decisionHandler.getCategory("searching");
     System.out.print("Enter the Max price range, EX $100");
     int maxR = scanner.nextInt();
@@ -150,6 +165,20 @@ public class UI
     commands.put("price", "searches product by Price");
     commands.put("Date", "searches product by Date");
     commands.put("Help", "prints these options again");
+    return null;
+
+  }
+
+  //not done need to take product catigory and convert it to "ArrayList<Product>" to properly call onto the method in sorting
+  public static Product PriceSort(){
+    System.out.println("You are now Sorting by Price.");
+    Database db = new Database(); // Creating a new database object.
+    Sorting sort = new Sorting();
+    DecisionHandler decisionHandler = new DecisionHandler();
+    //Scanner scanner = new Scanner(System.in);
+    System.out.println("What is the product you would like to sort: ");
+    Product.ProductCategory catigory = decisionHandler.getCategory("Sorting");
+    //String choice = scanner.next();
     return null;
 
   }
