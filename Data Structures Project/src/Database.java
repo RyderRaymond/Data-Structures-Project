@@ -67,13 +67,56 @@ public class Database {
         initializeJackets(jacketNum);
     }
 
+    //generates a price that to fit into an actual stores prices
+    public double genPrice(){
+        int selectprice = 0;
+        double price = 0;
+        Random rand = new Random();
+        selectprice = rand.nextInt(5);
+        switch (selectprice) {
+            case 0:
+                price = 31.99;
+                break;
+            case 1:
+                price = 29.99;
+                break;
+            case 2:
+                price = 32.50;
+                break;
+            case 3:
+                price = 30;
+                break;
+            case 4:
+                price = 35.99;
+                break;
+            case 5:
+                price = 28.50;
+                break;
+        }
+        return price;
+
+    }
+    // Set the range of dates to generate random dates from past 2 years
+    public Date genDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -2);
+        long startMillis = calendar.getTimeInMillis();
+        long endMillis = System.currentTimeMillis();
+
+        long randomMillis = startMillis + (long) (Math.random() * (endMillis - startMillis));
+
+        Date randomDate = new Date(randomMillis);
+
+        return randomDate;
+    }
+
     //Initializes the Jeans LinkedHashMap. Initializes the linked list and normal hashmap as well for comparison of runtime
     public void initializeJeans(int numJeans) {
         Random random = new Random();
 
         jeansLL = new LinkedList<>();
         for (int i = 0; i < numJeans; i++) {
-            jeansLL.add(new ProductJeans("Jeans" + i, random.nextDouble(15, 50), new Date()));
+            jeansLL.add(new ProductJeans("Jeans" + i, genPrice(), genDate()));
         }
 
         //Initial capacity is set to jeans * 2 to avoid collisions. Uses extra space but will be faster
@@ -99,7 +142,7 @@ public class Database {
         shirtPrices = new ArrayList<>(num);
 
         for (int i = 0; i < num; i++) {
-            ProductShirt next = new ProductShirt("Shirt" + i, random.nextDouble(15, 50), new Date());
+            ProductShirt next = new ProductShirt("Shirt" + i, genPrice(), genDate());
             shirtMap.put(next.getTitle(), next);
             shirtPrices.add(next);
             shirtDates.add(next);
@@ -128,7 +171,7 @@ public class Database {
         shortsDates = new ArrayList<>(num);
 
         for (int i = 0; i < num; i++) {
-            ProductShorts next = new ProductShorts("Shorts" + i, random.nextDouble(15, 50), new Date());
+            ProductShorts next = new ProductShorts("Shorts" + i, genPrice(), genDate());
             shortsMap.put(next.getTitle(), next);
             shortsPrices.add(next);
             shortsDates.add(next);
@@ -142,7 +185,7 @@ public class Database {
         hatDates = new ArrayList<>(num);
 
         for (int i = 0; i < num; i++) {
-            ProductHat next = new ProductHat("Hat" + i, random.nextDouble(15, 50), new Date());
+            ProductHat next = new ProductHat("Hat" + i, genPrice(), genDate());
             hatMap.put(next.getTitle(), next);
             hatPrices.add(next);
             hatDates.add(next);
@@ -156,7 +199,7 @@ public class Database {
         shoesDates = new ArrayList<>(num);
 
         for (int i = 0; i < num; i++) {
-            ProductShoes next = new ProductShoes("Shoes" + i, random.nextDouble(15, 50), new Date());
+            ProductShoes next = new ProductShoes("Shoes" + i, genPrice(), genDate());
             shoesMap.put(next.getTitle(), next);
             shoesPrices.add(next);
             shoesDates.add(next);
@@ -170,7 +213,7 @@ public class Database {
         jacketDates = new ArrayList<>(num);
 
         for (int i = 0; i < num; i++) {
-            ProductJacket next = new ProductJacket("Jacket" + i, random.nextDouble(15, 50), new Date());
+            ProductJacket next = new ProductJacket("Jacket" + i, genPrice(), genDate());
             jacketMap.put(next.getTitle(), next);
             jacketDates.add(next);
             jacketPrices.add(next);
@@ -179,7 +222,7 @@ public class Database {
 
 
     //using HashMap
-    public ProductJeans searchJeansHashMap(String name) {
+    public Product searchJeansHashMap(String name) {
         if (jeansMap.containsKey(name)) {
             return jeansMap.get(name);
         }
@@ -194,7 +237,7 @@ public class Database {
     }
 
     //using Linked Hashmap - the main implementation
-    public ProductJeans searchJeans(String name) {
+    public Product searchJeans(String name) {
         if (jeansMap.containsKey(name)) {
             return jeansMap.get(name);
         }
@@ -216,7 +259,7 @@ public class Database {
     //Sorts this product by prices using quicksort
     public void sortPrices(String productType) {
         //Initializes as jeansPrices so java does not get mad that list may not be initialized
-        ArrayList<Product> list = getPricesList(productType)
+        ArrayList<Product> list = getPricesList(productType);
 
         Sorting.quickSortByPrice(list);
     }

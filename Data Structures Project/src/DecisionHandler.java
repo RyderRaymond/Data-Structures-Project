@@ -15,25 +15,25 @@ public class DecisionHandler{
         {
             case "jeans":
                 return Product.ProductCategory.Jeans;
-                break;
+//                break;
             case "hat":
                 return Product.ProductCategory.Hat;
-                break;
+//                break;
             case "jacket":
                 return Product.ProductCategory.Jacket;
-                break;
+//                break;
             case "shirt":
                 return Product.ProductCategory.Shirt;
-                break;
+//                break;
             case "tshirt":
                 return Product.ProductCategory.TShirt;
-                break;
+//                break;
             case "shoes":
                 return Product.ProductCategory.Shoes;
-                break;
+//                break;
             case "shorts":
                 return Product.ProductCategory.Shorts;
-                break;
+//                break;
             default:
                 System.out.println("That was not a valid category");
                 return getCategory(task);
@@ -60,6 +60,7 @@ public class DecisionHandler{
                     "\nInput a valid decision: " + getArrayContents(validDecisions));
             decision = keyboard.nextLine();
         }
+        keyboard.close();
         return decision;
     }
 
@@ -76,6 +77,7 @@ public class DecisionHandler{
                     "\nInput a valid decision: " + getArrayContents(validDecisions));
             decision = keyboard.nextLine();
         }
+        keyboard.close();
         return decision;
     }
 

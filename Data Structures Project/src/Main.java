@@ -63,6 +63,9 @@ public class Main {
        Sorting.insertionSortPrices(products.jeansPrices);
         endTime = System.nanoTime();
         System.out.println(endTime - startTime);
+
+        UI ui = new UI();
+        ui.runDatabase();
     }
 
 }
