@@ -236,7 +236,7 @@ public class UI
         break;
     }
 
-    Inserting.i
+    //Inserting.i
   }
 
   public Product Sort() {
