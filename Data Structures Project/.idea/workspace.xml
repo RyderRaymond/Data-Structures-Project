@@ -5,18 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="067d2246-6ce2-441e-84b5-102c9b9a1c8c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/Data Structures Project/UI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/DecisionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/DecisionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Deleting$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Deleting$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Deleting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Deleting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Inserting.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Inserting.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/Product.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Data Structures Project/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Data Structures Project/UI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DecisionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DecisionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Deleting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Deleting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Inserting.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Inserting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

@@ -221,7 +221,7 @@ public class UI
     System.out.println("\nEnter the price of the new product: " );
 
     price = scanner.nextDouble();
-    scanner.next();
+//    scanner.next();
 
     Product p;
 
