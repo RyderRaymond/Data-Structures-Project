@@ -4,17 +4,21 @@ import java.util.LinkedHashMap;
 
 public class Inserting
   {
-    public void insert(Product p, Database db)
+    //returns true if the inserting worked and false otherwise
+    public static boolean insert(Product p, Database db)
     {
       LinkedHashMap<String, Product> map = db.getProductMap(p);
       String title = p.getTitle();
       if (!map.containsKey(p.getTitle())) {
         map.put(title, p);
         db.toBeAdded.add(p);
+        System.out.println("Insertion of product " + p.getTitle() + " was successful");
+        return true;
       }
       else {
         System.out.println("Two products cannot have the same title");
         System.out.println("The title of the new product matches with another product");
+        return false;
       }
     }
 

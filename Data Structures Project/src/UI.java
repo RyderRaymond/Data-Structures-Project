@@ -29,13 +29,15 @@ public class UI
 
   public void Introduction(){
     System.out.println
-            ("------------------------------------------\n" +
-                    "Welcome to the Designer Clothing Shop!!\n" +
-                    "-------Shop Created By-------\n" +
-                    "------Jefferson Cajuste------\n" +
-                    "-------Michael Doyle--------\n" +
-                    "-------Ryder Raymond-------\n" +
-                    "------------------------------------------\n");
+            ("""
+                    ------------------------------------------
+                    Welcome to the Designer Clothing Shop!!
+                    -------Shop Created By-------
+                    ------Jefferson Cajuste------
+                    -------Michael Doyle--------
+                    -------Ryder Raymond-------
+                    ------------------------------------------
+                    """);
 
     System.out.println("Within this clothing shop you will be able to complete several actions.");
   }
@@ -77,9 +79,10 @@ public class UI
           currentSelection = insert();
           break;
         case "Delete":
+          currentSelection = delete(currentSelection);
           break;
         case "Sort":
-          currentSelection = Sort();
+          sort();
           break;
         case "Print":
           break;
@@ -137,7 +140,14 @@ public class UI
 //    Scanner scanner = new Scanner(System.in);
     System.out.println("Enter the title of the product from the category you wish to search for: ");
     String title = scanner.nextLine();
-    return searching.searchByTitle(catigory,title);
+    Product result = searching.searchByTitle(catigory,title);
+
+    if (result != null)
+      System.out.println("Product " + result.getTitle() + " was found");
+    else
+      System.out.println("No product with title " + title + " was found");
+
+    return result;
   }
 
   public Product searchByRange(){
@@ -173,13 +183,17 @@ public class UI
     System.out.print("\nYour command: ");
     choice = scanner.nextLine();
 
+    choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
+
     switch(choice)
     {
       case ("Enter"):
-      case ("Exit"):
         return createNewProduct();
+      case ("Exit"):
+        return null;
       case ("Help"):
         return insert();
+
     }
     return null; ///just for now
   }
@@ -234,15 +248,20 @@ public class UI
       case Shorts:
         p = new ProductShorts(title, price, new Date());
         break;
+      default:
+        System.out.println("Incorrect category selection");
+        return null;
     }
 
-    //Inserting.i
+    //return the product if insertion was successful, null otherwise
+    return Inserting.insert(p, db) ? p : null;
+
   }
 
-  public Product Sort() {
+  public Product sort() {
     System.out.println("You are now Sorting.");
     String choice;
-    Scanner scanner = new Scanner(System.in);
+//    Scanner scanner = new Scanner(System.in);
 
     HashMap<String, String> commands = new HashMap<String, String>();
     commands.put("Exit", "returns to the selection screen");
@@ -256,8 +275,8 @@ public class UI
   //not done need to take product catigory and convert it to "ArrayList<Product>" to properly call onto the method in sorting
   public Product PriceSort(){
     System.out.println("You are now Sorting by Price.");
-    Database db = new Database(); // Creating a new database object.
-    Sorting sort = new Sorting();
+//    Database db = new Database(); // Creating a new database object.
+//    Sorting sort = new Sorting();
     DecisionHandler decisionHandler = new DecisionHandler();
     //Scanner scanner = new Scanner(System.in);
     System.out.println("What is the product you would like to sort: ");
@@ -267,8 +286,80 @@ public class UI
 
   }
 
-      public void printOptions()
+  public Product delete(Product selected)
   {
+    System.out.println("You are now deleting");
 
+    String choice;
+
+    HashMap<String, String> commands = new HashMap<>();
+    commands.put("Title", "deletes the product with the matching title");
+    commands.put("Selected", "deletes the currently selected product, if one is selected");
+    commands.put("Help", "prints the options again");
+    commands.put("Exit", "returns to the selection menu");
+
+    System.out.println("Possible commands:");
+
+    for (String command : commands.keySet()){
+      System.out.println(command + ": " + commands.get(command));
+    }
+
+    System.out.print("Your command: ");
+    choice = scanner.nextLine();
+    choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
+
+    switch (choice)
+    {
+      case "Title":
+        return deleteByTitle();
+      case "Selected":
+        return deleteBySelected(selected);
+      case "Help":
+        return delete(selected);
+      case "Exit":
+        return null;
+      default:
+        System.out.println("That was not an option");
+        return null;
+    }
   }
+
+  public Product deleteByTitle()
+  {
+    Product.ProductCategory category;
+    String title;
+
+    category = DecisionHandler.getCategory("deleting", scanner);
+
+    System.out.print("Enter the tile of the product you want to delete:");
+    title = scanner.nextLine();
+
+    Searching searching = new Searching(db);
+    Deleting deleting = new Deleting(db);
+    Product p = searching.searchByTitle(category, title);
+
+    if (p == null)
+    {
+      System.out.println("Cannot delete nonexistent product");
+      return null;
+    }
+
+    deleting.delete(p);
+    return null;
+  }
+
+  public Product deleteBySelected(Product selected)
+  {
+    if (selected == null)
+    {
+      System.out.println("You have no product selected");
+      return null;
+    }
+
+    Deleting deleting = new Deleting(db);
+    deleting.delete(selected);
+
+    return null;
+  }
+
 }
