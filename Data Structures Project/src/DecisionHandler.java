@@ -43,41 +43,41 @@ public class DecisionHandler{
 
 
     //method for handeling a question that has a decison based from an array like their backpack and ext.
-    public static String handleDecisions(String decision, String[] validDecisions)
+    public static String handleDecisions(String decision, String[] validDecisions, Scanner scanner)
     {
-        Scanner keyboard = new Scanner(System.in);
+//        Scanner keyboard = new Scanner(System.in);
         ArrayList<String> valid = new ArrayList<String>();
         for (String s : validDecisions)
         {
             valid.add(s);
         }
 
-        if (decision.equals("")) decision = keyboard.nextLine();
+        if (decision.equals("")) decision = scanner.nextLine();
 
         while(!valid.contains(decision))
         {
             System.out.print("That was not a valid decision." +
                     "\nInput a valid decision: " + getArrayContents(validDecisions));
-            decision = keyboard.nextLine();
+            decision = scanner.nextLine();
         }
-        keyboard.close();
+//        keyboard.close();
         return decision;
     }
 
     //method for handeling a question that has a decison based from an array like their backpack and ext.
-    public static String handleDecisions(String decision, Set<String> validDecisions)
+    public static String handleDecisions(String decision, Set<String> validDecisions, Scanner scanner)
     {
-        Scanner keyboard = new Scanner(System.in);
+//        Scanner keyboard = new Scanner(System.in);
 
-        if (decision.equals("")) decision = keyboard.nextLine();
+        if (decision.equals("")) decision = scanner.nextLine();
 
         while(!validDecisions.contains(decision))
         {
             System.out.print("That was not a valid decision." +
                     "\nInput a valid decision: " + getArrayContents(validDecisions));
-            decision = keyboard.nextLine();
+            decision = scanner.nextLine();
         }
-        keyboard.close();
+//        scanner.close();
         return decision;
     }
 

@@ -55,7 +55,7 @@ public class UI
 
       choice = scanner.nextLine();
 
-      choice = DecisionHandler.handleDecisions(choice, options);
+      choice = DecisionHandler.handleDecisions(choice, options, scanner);
 
       switch(choice)
       {
@@ -96,14 +96,14 @@ public class UI
       }
 
     System.out.println("----------------------------------------------------------");
-    Scanner keyboard = new Scanner(System.in);
+//    Scanner keyboard = new Scanner(System.in);
     System.out.print("Your Command: ");
 
-    choice = keyboard.nextLine();
+    choice = scanner.nextLine();
 
     try{
 //      choice = keyboard.nextLine();
-      choice = DecisionHandler.handleDecisions(choice, commands.keySet());
+      choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
       switch(choice) {
         case "Exit":
           return null;
