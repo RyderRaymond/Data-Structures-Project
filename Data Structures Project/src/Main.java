@@ -65,8 +65,9 @@ public class Main {
         endTime = System.nanoTime();
         System.out.println(endTime - startTime);
         */
-        
-        UI ui = new UI();
+
+        Database db = new Database();
+        UI ui = new UI(db);
         ui.runDatabase();
     }
 

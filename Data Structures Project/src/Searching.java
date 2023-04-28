@@ -1,10 +1,12 @@
 import java.util.LinkedHashMap;
+import java.util.Scanner;
 
 public class Searching{
   // The Searching class provides methods for searching and displaying products from the inventory database.
 
   // The database object used to store the inventory data.
   private Database db;
+  private Scanner scanner;
 
     // The constructor method that initializes the database object.
     public Searching(Database db) {
@@ -54,7 +56,7 @@ public class Searching{
                 break;
             default:
                 // Use the DecisionHandler class to get a valid category input.
-                category = DecisionHandler.getCategory("Searching");
+                category = DecisionHandler.getCategory("Searching", scanner);
                 return searchAllItems(category);
         }
 
@@ -75,7 +77,7 @@ public class Searching{
     // for a specific category.
     public void searchPriceRange (Product.ProductCategory category, int maxPrice, int minPrice){
         
-        LinkedHashMap<String, ? extends Product> productMap;
+        LinkedHashMap<String, Product> productMap;
 
         switch (category) {
             case Jeans:
@@ -101,7 +103,7 @@ public class Searching{
                 break;
             default:
                 // Use the DecisionHandler class to get a valid category input.
-                category = DecisionHandler.getCategory("Searching");
+                category = DecisionHandler.getCategory("Searching", scanner);
                 searchPriceRange(category, maxPrice, minPrice);
                 return;
         }
@@ -111,7 +113,7 @@ public class Searching{
         for (String key : productMap.keySet()) {
             Product product = productMap.get(key);
             if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
-              System.out.println(product.getTitle() + " - " + product.getPrice() + " - " + product.getListingDate());
+              System.out.println(product);  //product toString method called implicitly
             }
         }
     } 

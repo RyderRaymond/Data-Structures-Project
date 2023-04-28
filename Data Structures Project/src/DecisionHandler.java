@@ -4,10 +4,10 @@ import java.util.Set;
 
 public class DecisionHandler{
     //
-    public static Product.ProductCategory getCategory (String task){
-        Scanner scanner = new Scanner(System.in);
+    public static Product.ProductCategory getCategory (String task, Scanner scanner){
+//        Scanner scanner = new Scanner(System.in);
 //        categoryType();
-        System.out.println("Please choose a proper Item for " + task + ":");
+        System.out.println("Please choose the category for " + task + ":");
         String category = scanner.nextLine();
         category = category.toLowerCase();
 
@@ -36,13 +36,13 @@ public class DecisionHandler{
 //                break;
             default:
                 System.out.println("That was not a valid category");
-                return getCategory(task);
+                return getCategory(task, scanner);
         }
     }
 
 
 
-    //method for handeling a question that has a decison based from an array like their backpack and ext.
+    //method for handling a question that has a decision based from an array like their backpack and ext.
     public static String handleDecisions(String decision, String[] validDecisions, Scanner scanner)
     {
 //        Scanner keyboard = new Scanner(System.in);
@@ -64,7 +64,7 @@ public class DecisionHandler{
         return decision;
     }
 
-    //method for handeling a question that has a decison based from an array like their backpack and ext.
+    //method for handling a question that has a decision based from an array like their backpack and ext.
     public static String handleDecisions(String decision, Set<String> validDecisions, Scanner scanner)
     {
 //        Scanner keyboard = new Scanner(System.in);

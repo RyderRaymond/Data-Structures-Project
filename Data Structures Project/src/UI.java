@@ -1,12 +1,23 @@
+import java.util.Date;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 
 public class UI
 {
-  public static void runDatabase()
+  private Database db;
+  private Scanner scanner;
+
+  public UI(Database database)
+  {
+    db = database;
+    scanner = new Scanner(System.in);
+  }
+
+  public void runDatabase()
   {
     boolean running = true;
 
@@ -16,7 +27,7 @@ public class UI
       }
   }
 
-  public static void Introduction(){
+  public void Introduction(){
     System.out.println
             ("------------------------------------------\n" +
                     "Welcome to the Designer Clothing Shop!!\n" +
@@ -29,13 +40,13 @@ public class UI
     System.out.println("Within this clothing shop you will be able to complete several actions.");
   }
 
-  public static boolean master()
+  public boolean master()
   {
     Introduction();
-    Scanner scanner = new Scanner(System.in);
+//    Scanner scanner = new Scanner(System.in);
 
     String[] options =
-            {"Search", "Insert", "Delete", "Sort", "Print"};
+            {"Search", "Insert", "Delete", "Sort", "Print", "Exit"};
 
     Product currentSelection = null;
     String choice;
@@ -60,7 +71,7 @@ public class UI
       switch(choice)
       {
         case "Search":
-          currentSelection = search(scanner);
+          currentSelection = search();
           break;
         case "Insert":
           currentSelection = insert();
@@ -70,14 +81,15 @@ public class UI
         case "Sort":
           currentSelection = Sort();
           break;
-
         case "Print":
           break;
+        case "Exit":
+          return false;
       }
     }
   }
 
-  public static Product search(Scanner scanner)
+  public Product search()
   {
     System.out.println("You are now searching.");
     String choice = "";
@@ -95,54 +107,45 @@ public class UI
         System.out.println(command + ": " + commands.get(command));
       }
 
-    System.out.println("----------------------------------------------------------");
-//    Scanner keyboard = new Scanner(System.in);
-    System.out.print("Your Command: ");
+      System.out.println("----------------------------------------------------------");
+    //    Scanner keyboard = new Scanner(System.in);
+      System.out.print("Your Command: ");
 
-    choice = scanner.nextLine();
+      choice = scanner.nextLine();
 
-    try{
 //      choice = keyboard.nextLine();
       choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
+
       switch(choice) {
         case "Exit":
           return null;
-  //          break;
         case "Title":
           return searchByTitle();
         case "Range":
           return searchByRange();
-  
+        case "Help":
+          return search();
       }
-    }catch (NoSuchElementException e){
-      System.out.println("You have entered an invalid command(SOMETHIG WENT WRONG).");
-    }
 
-    
-    return null;
-
+    return null;  //choice somehow was not an option
   }
 
-  public static Product searchByTitle()
+  public Product searchByTitle()
   {
-    Database db = new Database(); // Creating a new database object.
     Searching searching = new Searching(db); // Passing the database object to the constructor.
-    DecisionHandler decisionHandler = new DecisionHandler();
-    Product.ProductCategory catigory = decisionHandler.getCategory("searching");
-    Scanner scanner = new Scanner(System.in);
+    Product.ProductCategory catigory = DecisionHandler.getCategory("searching", scanner);
+//    Scanner scanner = new Scanner(System.in);
     System.out.println("Enter the title of the product from the category you wish to search for: ");
     String title = scanner.nextLine();
-    searching.searchByTitle(catigory,title);
-
-    return null; //temporary
+    return searching.searchByTitle(catigory,title);
   }
 
-  public static Product searchByRange(){
+  public Product searchByRange(){
     Database db = new Database(); // Creating a new database object.
     Searching searching = new Searching(db); // Passing the database object to the constructor.
-    DecisionHandler decisionHandler = new DecisionHandler();
-    Scanner scanner = new Scanner(System.in);
-    Product.ProductCategory catigory = decisionHandler.getCategory("searching");
+//    DecisionHandler decisionHandler = new DecisionHandler();
+//    Scanner scanner = new Scanner(System.in);
+    Product.ProductCategory catigory = DecisionHandler.getCategory("searching", scanner);
     System.out.print("Enter the Max price range, EX $100");
     int maxR = scanner.nextInt();
     System.out.print("Enter the Min price range, EX $50");
@@ -152,20 +155,91 @@ public class UI
     return null;
   }
 
-  public static Product insert(){
+  public Product insert(){
     System.out.println("You are now Inserting.");
     String choice;
-    Scanner scanner = new Scanner(System.in);
 
     HashMap<String, String> commands = new HashMap<String, String>();
+    commands.put("Enter", "enters a new product into the database");
     commands.put("Exit", "returns to the selection screen");
-    // commands.put("Title", "searches for a product with a specific title");
-    // commands.put("Range", "searches the product category at a specific price range of products");
     commands.put("Help", "prints these options again");
+
+    System.out.println("Possible commands:");
+    for (String command : commands.keySet())
+    {
+      System.out.println(command + ": " + commands.get(command));
+    }
+
+    System.out.print("\nYour command: ");
+    choice = scanner.nextLine();
+
+    switch(choice)
+    {
+      case ("Enter"):
+      case ("Exit"):
+        return createNewProduct();
+      case ("Help"):
+        return insert();
+    }
     return null; ///just for now
   }
 
-  public static Product Sort() {
+  private Product createNewProduct()
+  {
+    Product.ProductCategory category;
+    String title;
+    double price;
+
+    System.out.print("Enter the category of the new product: ");
+    category = DecisionHandler.getCategory("Inserting", scanner);
+
+    System.out.print("Enter the tile of the new product: " );
+    title = scanner.nextLine();
+
+    //they need to enter a product with a title at least 1 character long
+    while (title.length() < 1)
+    {
+      System.out.println("The title must have a length greater than 0");
+      System.out.print("New title: " );
+      title = scanner.nextLine();
+    }
+
+    System.out.println("\nEnter the price of the new product: " );
+
+    price = scanner.nextDouble();
+    scanner.next();
+
+    Product p;
+
+    switch(category)
+    {
+      case Jeans:
+         p = new ProductJeans(title, price, new Date());
+         break;
+      case Shirt:
+        p = new ProductShirt(title, price, new Date());
+        break;
+      case TShirt:
+        p = new ProductTShirt(title, price, new Date());
+        break;
+      case Hat:
+        p = new ProductHat(title, price, new Date());
+        break;
+      case Jacket:
+        p = new ProductJacket(title, price, new Date());
+        break;
+      case Shoes:
+        p = new ProductShoes(title, price, new Date());
+        break;
+      case Shorts:
+        p = new ProductShorts(title, price, new Date());
+        break;
+    }
+
+    Inserting.i
+  }
+
+  public Product Sort() {
     System.out.println("You are now Sorting.");
     String choice;
     Scanner scanner = new Scanner(System.in);
@@ -180,14 +254,14 @@ public class UI
   }
 
   //not done need to take product catigory and convert it to "ArrayList<Product>" to properly call onto the method in sorting
-  public static Product PriceSort(){
+  public Product PriceSort(){
     System.out.println("You are now Sorting by Price.");
     Database db = new Database(); // Creating a new database object.
     Sorting sort = new Sorting();
     DecisionHandler decisionHandler = new DecisionHandler();
     //Scanner scanner = new Scanner(System.in);
     System.out.println("What is the product you would like to sort: ");
-    Product.ProductCategory catigory = decisionHandler.getCategory("Sorting");
+    Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
     //String choice = scanner.next();
     return null;
 

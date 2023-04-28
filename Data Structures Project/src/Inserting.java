@@ -8,8 +8,14 @@ public class Inserting
     {
       LinkedHashMap<String, Product> map = db.getProductMap(p);
       String title = p.getTitle();
-      map.put(title, p);
-      db.toBeAdded.add(p);
+      if (!map.containsKey(p.getTitle())) {
+        map.put(title, p);
+        db.toBeAdded.add(p);
+      }
+      else {
+        System.out.println("Two products cannot have the same title");
+        System.out.println("The title of the new product matches with another product");
+      }
     }
 
       //inserts a new product into the given list based on price. 
