@@ -1,30 +1,30 @@
 import java.util.LinkedHashMap;
 
 public class Deleting{
-    public void delete(Product p) {
+    public void delete(Product p, Database db) {
         LinkedHashMap<String, Product> map;
         String title = p.getTitle();
         switch (p.category) {
             case Jeans:
-                map = jeansMap;
+                map = db.jeansMap;
                 break;
             case Shirt:
-                map = shirtMap;
+                map = db.shirtMap;
                 break;
             case TShirt:
-                map = tShirtMap;
+                map = db.tShirtMap;
                 break;
             case Shorts:
-                map = shortsMap;
+                map = db.shortsMap;
                 break;
             case Hat:
-                map = hatMap;
+                map = db.hatMap;
                 break;
             case Shoes:
-                map = shoesMap;
+                map = db.shoesMap;
                 break;
             case Jacket:
-                map = jacketMap;
+                map = db.jacketMap;
                 break;
             default:
                 throw new IllegalArgumentException("The product category was not found; nothing was deleted");

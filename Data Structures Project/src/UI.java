@@ -2,6 +2,8 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+
+
 public class UI
 {
   public static void runDatabase()
@@ -36,6 +38,7 @@ public class UI
             {"Search", "Insert", "Delete", "Sort", "Print"};
 
     Product currentSelection = null;
+    String choice;
 
     while (true){
       System.out.print("Possible actions are: ");
@@ -48,31 +51,36 @@ public class UI
       else
         System.out.println(currentSelection);
 
-      System.out.print("What would you like to do?: ");
+      System.out.println("What would you like to do?: ");
 
-      String choice = scanner.nextLine();
+      choice = scanner.nextLine();
 
       choice = DecisionHandler.handleDecisions(choice, options);
 
       switch(choice)
       {
         case "Search":
-          currentSelection = search();
+          currentSelection = search(scanner);
+          break;
         case "Insert":
           currentSelection = insert();
+          break;
         case "Delete":
+          break;
         case "Sort":
           currentSelection = Sort();
+          break;
 
         case "Print":
-
+          break;
       }
     }
   }
 
-  public static Product search()
+  public static Product search(Scanner scanner)
   {
     System.out.println("You are now searching.");
+    String choice = "";
 
     HashMap<String, String> commands = new HashMap<String, String>();
     commands.put("Exit", "returns to the selection screen");
@@ -89,10 +97,12 @@ public class UI
 
     System.out.println("----------------------------------------------------------");
     Scanner keyboard = new Scanner(System.in);
-    System.out.println("Your Command: ");
-    String choice;
+    System.out.print("Your Command: ");
+
+    choice = keyboard.nextLine();
+
     try{
-      choice = keyboard.next();
+//      choice = keyboard.nextLine();
       choice = DecisionHandler.handleDecisions(choice, commands.keySet());
       switch(choice) {
         case "Exit":
