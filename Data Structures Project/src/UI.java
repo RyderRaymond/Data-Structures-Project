@@ -87,6 +87,7 @@ public class UI
           currentSelection = sort();
           break;
         case "print":
+          print();
           break;
         case "exit":
           return false;
@@ -272,6 +273,8 @@ public class UI
 
 /*---START OF SORTING--- */
   public Product sort() {
+    //synchronize the hashmaps with the arraylists because that is how we sort by price or date
+    db.sync();
     System.out.println("----");
     System.out.println("*You are now Sorting.*");
     String choice;
@@ -279,8 +282,8 @@ public class UI
 
     HashMap<String, String> commands = new HashMap<String, String>();
     commands.put("Exit", "returns to the selection screen");
-    commands.put("Price", "searches product by Price");
-    commands.put("Date", "searches product by Date");
+    commands.put("Price", "sorts products by Price");
+    commands.put("Date", "sorts product by Date");
     commands.put("Help", "prints these options again");
 
     System.out.println("----------------------------------------------------------");
@@ -313,28 +316,50 @@ public class UI
   //need to work more on both priceSord and dateSort
   //public ArrayList<Product> priceSort(){
   public Product priceSort(){
-    System.out.println("You are now Sorting by Price.");
-    // DecisionHandler decisionHandler = new DecisionHandler();
-    // Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
+    String category;
+    String order;
 
-    // ArrayList<Product> products = new ArrayList<Product>();
-    // for (Product p : Product.ProductCategory) {
-    //   if (p.getProducts() == category) {
-    //       products.add(p);
-    //   }
-    // }
-    // Sorting.quickSortByPrice(products);
-    //return products;
+    System.out.println("\nYou are now Sorting by Price.");
+    System.out.println("Enter the category you want sort:");
+    category = DecisionHandler.getCategory("sorting", scanner).toString();
+    System.out.println();
+    
+    db.sortPrices(category);
+
+    System.out.println("Would you like to sort in order or reverse?");
+    System.out.println("Commands: in order | reverse");
+    order = scanner.nextLine();
+    order = DecisionHandler.handleDecisions(order, new String[] {"in order", "reverse"}, scanner);
+
+    if (order.equals("in order"))
+      db.printAll(db.getPricesList(category));
+    else
+      db.printAllReverse(db.getPricesList(category));
+
     return null;
   }
 
   public Product dateSort(){
-    System.out.println("You are now Sorting by Date.");
-    // DecisionHandler decisionHandler = new DecisionHandler();
-    // Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
-    // ArrayList<Product> products = new ArrayList<Product>();
-    // products = Product.getProducts(catigory);
-    // Sorting.quickSortByDate(products);
+    String category;
+    String order;
+
+    System.out.println("\nYou are now Sorting by Date.");
+    System.out.println("Enter the category you want sort:");
+    category = DecisionHandler.getCategory("sorting", scanner).toString();
+    System.out.println();
+
+    System.out.println("Would you like to sort in order or reverse?");
+    System.out.println("Commands: in order | reverse");
+    order = scanner.nextLine();
+    order = DecisionHandler.handleDecisions(order, new String[] {"in order", "reverse"}, scanner);
+
+    db.sortDates(category);
+
+    if (order.equals("in order"))
+      db.printAll(db.getDatesList(category));
+    else
+      db.printAllReverse(db.getDatesList(category));
+
     return null;
   }
 /*---END OF SORTING--- */
@@ -420,4 +445,70 @@ public class UI
   }
 /*---END OF DELETING--- */
 
+  /*---START OF PRINTING--- */
+
+  public void print()
+  {
+    System.out.println("You are now printing");
+    String choice;
+
+    HashMap<String, String> commands = new HashMap<>();
+    commands.put("All", "prints all products in all categories in the database");
+    commands.put("Category", "prints all products in a single category");
+    commands.put("Help", "prints these options again");
+    commands.put("Exit", "exits to main menu");
+
+    System.out.println("Possible commands: ");
+    for (String command : commands.keySet())
+    {
+      System.out.println(command + ": " + commands.get(command));
+    }
+    System.out.println();
+
+    System.out.print("Your command: ");
+
+    choice = scanner.nextLine();
+    choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
+
+    switch(choice)
+    {
+      case "All":
+        printAll();
+        break;
+      case "Category":
+        printCategory();
+        break;
+      case "Help":
+        print();
+        break;
+      case "Exit":
+        break;
+    }
+  }
+
+  public void printAll() {
+    for (Product.ProductCategory category : Product.ProductCategory.values())
+    {
+      System.out.println("Printing all products in category: " + category.toString());
+
+      db.printAll(db.getPricesList(category.toString()));
+      System.out.println("Press enter to continue printing next categories");
+      scanner.nextLine();
+    }
+  }
+
+  public void printCategory()
+  {
+    System.out.println("You are now printing by category");
+    System.out.println("This will print the category by price as default");
+
+    String category;
+
+    System.out.println("Enter the category you want print:");
+    category = DecisionHandler.getCategory("printing", scanner).toString();
+
+    System.out.println("Printing all products in category: " + category);
+    db.printAll(db.getPricesList(category));
+  }
+  /*---END OF PRINTING--- */
 }
