@@ -300,6 +300,40 @@ public class Database {
     toBeDeleted = new LinkedList<Product>();
   }
 
+  //testing
+//   public ArrayList<Product> getProductList(Product p)
+//   {        
+//     //Initializes as jeansPrices so java does not get mad that list may not be initialized
+//         ArrayList<Product> list = Jeans;
+
+//         switch (p.category) {
+//             case Jeans:
+//                 list = jeansPrices;
+//                 break;
+//             case Shirt:
+//                 list = shirtPrices;
+//                 break;
+//             case TShirt:
+//                 list = tShirtPrices;
+//                 break;
+//             case Shorts:
+//                 list = shortsPrices;
+//                 break;
+//             case Hat:
+//                 list = hatPrices;
+//                 break;
+//             case Shoes:
+//                 list = shoesPrices;
+//                 break;
+//             case Jacket:
+//                 list = jacketPrices;
+//                 break;
+//         }
+
+//       return list;
+//   }
+
+
   //returns the list of this product category sorted by price
   public ArrayList<Product> getPricesList(String productType)
   {        

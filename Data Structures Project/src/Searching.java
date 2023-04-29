@@ -110,10 +110,15 @@ public class Searching{
 
         // Iterate through the productMap and display the product details if it falls
         // within the given price range
+        int counter = 0;
         for (String key : productMap.keySet()) {
             Product product = productMap.get(key);
             if (product.getPrice() >= minPrice && product.getPrice() <= maxPrice) {
               System.out.println(product);  //product toString method called implicitly
+              counter++;
+            }
+            if (counter == 0) {
+                System.out.println("No products found within the given price range.");
             }
         }
     } 

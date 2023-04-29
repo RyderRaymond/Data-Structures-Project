@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.ArrayList;
 
 
 public class UI
@@ -28,7 +29,10 @@ public class UI
   }
 
   public void Introduction(){
-    System.out.println
+    //i do not have java 15 on my device 
+    //so the 3 quoted comments do not work for me 
+    //i simply do a quick change to test
+    System.out.println //("THE CODE CODE STARTS HERE");
             ("""
                     ------------------------------------------
                     Welcome to the Designer Clothing Shop!!
@@ -70,31 +74,33 @@ public class UI
 
       choice = DecisionHandler.handleDecisions(choice, options, scanner);
 
-      switch(choice)
+      switch(choice.toLowerCase())
       {
-        case "Search":
+        case "search":
           currentSelection = search();
           break;
-        case "Insert":
+        case "insert":
           currentSelection = insert();
           break;
-        case "Delete":
+        case "delete":
           currentSelection = delete(currentSelection);
           break;
-        case "Sort":
-          sort();
+        case "sort":
+          currentSelection = sort();
           break;
-        case "Print":
+        case "print":
           break;
-        case "Exit":
+        case "exit":
           return false;
       }
     }
   }
 
+/*---START OF SEARCHING--- */
   public Product search()
   {
-    System.out.println("You are now searching.");
+    System.out.println("----");
+    System.out.println("*You are now searching.*");
     String choice = "";
 
     HashMap<String, String> commands = new HashMap<String, String>();
@@ -119,14 +125,14 @@ public class UI
 //      choice = keyboard.nextLine();
       choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
 
-      switch(choice) {
-        case "Exit":
+      switch(choice.toLowerCase()) {
+        case "exit":
           return null;
-        case "Title":
+        case "title":
           return searchByTitle();
-        case "Range":
+        case "range":
           return searchByRange();
-        case "Help":
+        case "help":
           return search();
       }
 
@@ -155,18 +161,22 @@ public class UI
     Searching searching = new Searching(db); // Passing the database object to the constructor.
 //    DecisionHandler decisionHandler = new DecisionHandler();
 //    Scanner scanner = new Scanner(System.in);
-    Product.ProductCategory catigory = DecisionHandler.getCategory("searching", scanner);
-    System.out.print("Enter the Max price range, EX $100");
+    Product.ProductCategory catigory = DecisionHandler.getCategory("Searching", scanner);
+    System.out.print("Enter the Max price range, EX $100: ");
     int maxR = scanner.nextInt();
-    System.out.print("Enter the Min price range, EX $50");
+    System.out.print("Enter the Min price range, EX $50: ");
     int minR = scanner.nextInt();
 
     searching.searchPriceRange(catigory,maxR,minR);
     return null;
   }
+/*---END OF SEARCHING--- */
 
+
+/*---START OF INSERTING--- */
   public Product insert(){
-    System.out.println("You are now Inserting.");
+    System.out.println("----");
+    System.out.println("*You are now Inserting.*");
     String choice;
 
     HashMap<String, String> commands = new HashMap<String, String>();
@@ -174,24 +184,26 @@ public class UI
     commands.put("Exit", "returns to the selection screen");
     commands.put("Help", "prints these options again");
 
+    System.out.println("----------------------------------------------------------");
     System.out.println("Possible commands:");
     for (String command : commands.keySet())
     {
       System.out.println(command + ": " + commands.get(command));
     }
+    System.out.println("----------------------------------------------------------");
 
     System.out.print("\nYour command: ");
     choice = scanner.nextLine();
 
     choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
 
-    switch(choice)
+    switch(choice.toLowerCase())
     {
-      case ("Enter"):
+      case ("enter"):
         return createNewProduct();
-      case ("Exit"):
+      case ("exit"):
         return null;
-      case ("Help"):
+      case ("help"):
         return insert();
 
     }
@@ -257,9 +269,13 @@ public class UI
     return Inserting.insert(p, db) ? p : null;
 
   }
+/*---END OF INSERTING--- */
 
+
+/*---START OF SORTING--- */
   public Product sort() {
-    System.out.println("You are now Sorting.");
+    System.out.println("----");
+    System.out.println("*You are now Sorting.*");
     String choice;
 //    Scanner scanner = new Scanner(System.in);
 
@@ -268,27 +284,69 @@ public class UI
     commands.put("price", "searches product by Price");
     commands.put("Date", "searches product by Date");
     commands.put("Help", "prints these options again");
-    return null;
 
+    System.out.println("----------------------------------------------------------");
+    System.out.println("Possible commands:");
+    for (String command : commands.keySet())
+    {
+      System.out.println(command + ": " + commands.get(command));
+    }
+    System.out.println("----------------------------------------------------------");
+
+    System.out.print("\nYour command: ");
+    choice = scanner.nextLine();
+
+    choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
+
+    switch(choice.toLowerCase())
+    {
+      case ("price"):
+        return priceSort();
+      case ("exit"):
+        return null;
+      case ("help"):
+        return sort();
+      case ("date"):
+        return dateSort();
+
+    }
+    return null;
   }
 
-  //not done need to take product catigory and convert it to "ArrayList<Product>" to properly call onto the method in sorting
-  public Product PriceSort(){
+  //need to work more on both priceSord and dateSort
+  //public ArrayList<Product> priceSort(){
+  public Product priceSort(){
     System.out.println("You are now Sorting by Price.");
-//    Database db = new Database(); // Creating a new database object.
-//    Sorting sort = new Sorting();
-    DecisionHandler decisionHandler = new DecisionHandler();
-    //Scanner scanner = new Scanner(System.in);
-    System.out.println("What is the product you would like to sort: ");
-    Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
-    //String choice = scanner.next();
-    return null;
+    // DecisionHandler decisionHandler = new DecisionHandler();
+    // Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
 
+    // ArrayList<Product> products = new ArrayList<Product>();
+    // for (Product p : Product.ProductCategory) {
+    //   if (p.getProducts() == category) {
+    //       products.add(p);
+    //   }
+    // }
+    // Sorting.quickSortByPrice(products);
+    //return products;
+    return null;
   }
 
+  public Product dateSort(){
+    System.out.println("You are now Sorting by Date.");
+    // DecisionHandler decisionHandler = new DecisionHandler();
+    // Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
+    // ArrayList<Product> products = new ArrayList<Product>();
+    // products = Product.getProducts(catigory);
+    // Sorting.quickSortByDate(products);
+    return null;
+  }
+/*---END OF SORTING--- */
+
+/*---START OF DELETING--- */
   public Product delete(Product selected)
   {
-    System.out.println("You are now deleting");
+    System.out.println("----");
+    System.out.println("*You are now deleting*");
 
     String choice;
 
@@ -298,25 +356,27 @@ public class UI
     commands.put("Help", "prints the options again");
     commands.put("Exit", "returns to the selection menu");
 
+    System.out.println("----------------------------------------------------------");
     System.out.println("Possible commands:");
 
     for (String command : commands.keySet()){
       System.out.println(command + ": " + commands.get(command));
     }
+    System.out.println("----------------------------------------------------------");
 
     System.out.print("Your command: ");
     choice = scanner.nextLine();
     choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
 
-    switch (choice)
+    switch (choice.toLowerCase())
     {
-      case "Title":
+      case "title":
         return deleteByTitle();
-      case "Selected":
+      case "selected":
         return deleteBySelected(selected);
-      case "Help":
+      case "help":
         return delete(selected);
-      case "Exit":
+      case "exit":
         return null;
       default:
         System.out.println("That was not an option");
@@ -361,5 +421,6 @@ public class UI
 
     return null;
   }
+/*---END OF DELETING--- */
 
 }

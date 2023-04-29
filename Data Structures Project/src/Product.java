@@ -38,6 +38,10 @@ public class Product {
         return listingDate;
     }
 
+    public ProductCategory getProducts() {
+        return category;
+    }
+
     public String toString()
     {
         return "Title: " + title + ", Price: $" + price + ", Date: " + listingDate;

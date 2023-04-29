@@ -7,7 +7,7 @@ public class DecisionHandler{
     public static Product.ProductCategory getCategory (String task, Scanner scanner){
 //        Scanner scanner = new Scanner(System.in);
 //        categoryType();
-        System.out.println("Please choose the category for " + task + ":");
+        System.out.print("Please choose the category for " + task + ": ");
         String category = scanner.nextLine();
         category = category.toLowerCase();
 
@@ -53,17 +53,19 @@ public class DecisionHandler{
     {
 //        Scanner keyboard = new Scanner(System.in);
         ArrayList<String> valid = new ArrayList<String>();
+        ArrayList<String> valid2 = new ArrayList<String>();
         for (String s : validDecisions)
         {
             valid.add(s);
+            valid2.add(s.toLowerCase());
         }
 
         if (decision.equals("")) decision = scanner.nextLine();
 
-        while(!valid.contains(decision))
+        while(!valid.contains(decision) && !valid2.contains(decision.toLowerCase()))
         {
             System.out.print("That was not a valid decision." +
-                    "\nInput a valid decision: " + getArrayContents(validDecisions));
+                    "\nInput a valid decision [" + getArrayContents(validDecisions) + "]: ");
             decision = scanner.nextLine();
         }
 //        keyboard.close();
@@ -74,13 +76,18 @@ public class DecisionHandler{
     public static String handleDecisions(String decision, Set<String> validDecisions, Scanner scanner)
     {
 //        Scanner keyboard = new Scanner(System.in);
+        ArrayList<String> valid2 = new ArrayList<String>();
+        for (String s : validDecisions)
+        {
+            valid2.add(s.toLowerCase());
+        }
 
         if (decision.equals("")) decision = scanner.nextLine();
 
-        while(!validDecisions.contains(decision))
+        while(!validDecisions.contains(decision) && !valid2.contains(decision.toLowerCase()))
         {
             System.out.print("That was not a valid decision." +
-                    "\nInput a valid decision: " + getArrayContents(validDecisions));
+                    "\nInput a valid decision [" + getArrayContents(validDecisions) + "]: ");
             decision = scanner.nextLine();
         }
 //        scanner.close();
