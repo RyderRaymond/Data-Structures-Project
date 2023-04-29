@@ -326,12 +326,12 @@ public class UI
     
     db.sortPrices(category);
 
-    System.out.println("Would you like to sort in order or reverse?");
-    System.out.println("Commands: in order | reverse");
+    System.out.println("Would you like to sort high to low or low to high?");
+    System.out.println("Commands: high to low | low to high");
     order = scanner.nextLine();
-    order = DecisionHandler.handleDecisions(order, new String[] {"in order", "reverse"}, scanner);
+    order = DecisionHandler.handleDecisions(order, new String[] {"high to low", "low to high"}, scanner);
 
-    if (order.equals("in order"))
+    if (order.equals("low to high"))
       db.printAll(db.getPricesList(category));
     else
       db.printAllReverse(db.getPricesList(category));
@@ -348,14 +348,14 @@ public class UI
     category = DecisionHandler.getCategory("sorting", scanner).toString();
     System.out.println();
 
-    System.out.println("Would you like to sort in order or reverse?");
-    System.out.println("Commands: in order | reverse");
+    System.out.println("Would you like to sort newest or oldest first?");
+    System.out.println("Commands: newest | oldest");
     order = scanner.nextLine();
-    order = DecisionHandler.handleDecisions(order, new String[] {"in order", "reverse"}, scanner);
+    order = DecisionHandler.handleDecisions(order, new String[] {"newest", "oldest"}, scanner);
 
     db.sortDates(category);
 
-    if (order.equals("in order"))
+    if (order.equals("oldest"))
       db.printAll(db.getDatesList(category));
     else
       db.printAllReverse(db.getDatesList(category));
@@ -469,19 +469,20 @@ public class UI
 
     choice = scanner.nextLine();
     choice = DecisionHandler.handleDecisions(choice, commands.keySet(), scanner);
+    choice = choice.toLowerCase();
 
     switch(choice)
     {
-      case "All":
+      case "all":
         printAll();
         break;
-      case "Category":
+      case "category":
         printCategory();
         break;
-      case "Help":
+      case "help":
         print();
         break;
-      case "Exit":
+      case "exit":
         break;
     }
   }
@@ -508,7 +509,10 @@ public class UI
     category = DecisionHandler.getCategory("printing", scanner).toString();
 
     System.out.println("Printing all products in category: " + category);
+    System.out.println();
+
     db.printAll(db.getPricesList(category));
   }
   /*---END OF PRINTING--- */
+
 }
