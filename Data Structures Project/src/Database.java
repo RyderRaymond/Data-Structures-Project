@@ -51,6 +51,13 @@ public class Database {
         initializeShoes(NUM);
         initializeJackets(NUM);
 
+        //sorts all
+        for (Product.ProductCategory category : Product.ProductCategory.values())
+        {
+            sortDates(category.toString());
+            sortPrices(category.toString());
+        }
+
         toBeDeleted = new LinkedList<Product>();
         toBeAdded = new LinkedList<Product>();
     }
@@ -65,6 +72,16 @@ public class Database {
         initializeHats(hatNum);
         initializeShoes(shoesNum);
         initializeJackets(jacketNum);
+
+        //sorts all
+        for (Product.ProductCategory category : Product.ProductCategory.values())
+        {
+            sortDates(category.toString());
+            sortPrices(category.toString());
+        }
+
+        toBeDeleted = new LinkedList<Product>();
+        toBeAdded = new LinkedList<Product>();
     }
 
     //generates a price that to fit into an actual stores prices
@@ -336,9 +353,11 @@ public class Database {
 
   //returns the list of this product category sorted by price
   public ArrayList<Product> getPricesList(String productType)
-  {        
+  {
+      productType = productType.toLowerCase();
     //Initializes as jeansPrices so java does not get mad that list may not be initialized
         ArrayList<Product> list = jeansPrices;
+        productType = productType.toLowerCase();
 
         switch (productType) {
             case "jeans":
@@ -436,7 +455,8 @@ public class Database {
 
   //returns the list of this product's category sorted by date
         public ArrayList<Product> getDatesList(String productType)
-  {        
+  {
+      productType = productType.toLowerCase();
     //Initializes as jeansPrices so java does not get mad that list may not be initialized
         ArrayList<Product> list = jeansDates;
 
@@ -540,6 +560,15 @@ public class Database {
     public void printAll(ArrayList<Product> list) {
         for (Product p : list) {
             System.out.println(p);
+        }
+    }
+
+    //prints in reverse (for sorting in reverse)
+    public void printAllReverse(ArrayList<Product> list)
+    {
+        for (int i = list.size() - 1; i >= 0; i--)
+        {
+            System.out.println(list.get(i));
         }
     }
 
