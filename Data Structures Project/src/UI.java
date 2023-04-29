@@ -33,15 +33,13 @@ public class UI
     //so the 3 quoted comments do not work for me 
     //i simply do a quick change to test
     System.out.println //("THE CODE CODE STARTS HERE");
-            ("""
-                    ------------------------------------------
-                    Welcome to the Designer Clothing Shop!!
-                    -------Shop Created By-------
-                    ------Jefferson Cajuste------
-                    -------Michael Doyle--------
-                    -------Ryder Raymond-------
-                    ------------------------------------------
-                    """);
+            ("------------------------------------------\n" +
+                    "Welcome to the Designer Clothing Shop!!\n" +
+                    "-------Shop Created By-------\n" +
+                    "------Jefferson Cajuste------\n" +
+                    "-------Michael Doyle--------\n" +
+                    "-------Ryder Raymond-------\n" +
+                    "------------------------------------------");
 
     System.out.println("Within this clothing shop you will be able to complete several actions.");
   }
@@ -281,7 +279,7 @@ public class UI
 
     HashMap<String, String> commands = new HashMap<String, String>();
     commands.put("Exit", "returns to the selection screen");
-    commands.put("price", "searches product by Price");
+    commands.put("Price", "searches product by Price");
     commands.put("Date", "searches product by Date");
     commands.put("Help", "prints these options again");
 
@@ -308,7 +306,6 @@ public class UI
         return sort();
       case ("date"):
         return dateSort();
-
     }
     return null;
   }
