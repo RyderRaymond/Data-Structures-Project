@@ -119,5 +119,53 @@ public class DecisionHandler{
         return result;
     }
 
+    //get category with use of WordSuggester
+    public static Product.ProductCategory getCategoryWithSuggestion (WordSuggester suggester, Scanner scanner){
 
+        System.out.print("Possible categories: ");
+        for (Product.ProductCategory c : Product.ProductCategory.values()){
+            System.out.print(String.valueOf(c) + ", ");
+        }
+        System.out.println();
+
+        System.out.print("Please choose the category: ");
+        String category = scanner.nextLine();
+        category = suggester.suggest(category, scanner);
+        category = category.toLowerCase();
+
+        switch(category)
+        {
+            case "jeans":
+                return Product.ProductCategory.Jeans;
+//                break;
+            case "hat":
+                return Product.ProductCategory.Hat;
+//                break;
+            case "jacket":
+                return Product.ProductCategory.Jacket;
+//                break;
+            case "shirt":
+                return Product.ProductCategory.Shirt;
+//                break;
+            case "tshirt":
+                return Product.ProductCategory.TShirt;
+//                break;
+            case "shoes":
+                return Product.ProductCategory.Shoes;
+//                break;
+            case "shorts":
+                return Product.ProductCategory.Shorts;
+//                break;
+            default:
+                System.out.println("That was not a valid category");
+                System.out.print("Categories: [");
+
+                for (Product.ProductCategory c : Product.ProductCategory.values()){
+                    System.out.print(String.valueOf(c) + ", ");
+                }
+                System.out.print("]");
+                System.out.println();
+                return getCategoryWithSuggestion(suggester, scanner);
+        }
+    }
 }

@@ -108,6 +108,7 @@ public class UI
     commands.put("Exit", "returns to the selection screen");
     commands.put("Title", "searches for a product with a specific title");
     commands.put("Range", "searches the product category at a specific price range of products");
+    commands.put("Suggestion", "searches for a product with a specific title with word auto-suggestion");
     commands.put("Help", "prints these options again");
 
     System.out.println("----------------------------------------------------------");
@@ -133,6 +134,8 @@ public class UI
           return searchByTitle();
         case "range":
           return searchByRange();
+        case "suggestion":
+          return searchTitleWithSuggestion();
         case "help":
           return search();
       }
@@ -145,9 +148,31 @@ public class UI
     Searching searching = new Searching(db); // Passing the database object to the constructor.
     Product.ProductCategory catigory = DecisionHandler.getCategory("searching", scanner);
 //    Scanner scanner = new Scanner(System.in);
-    System.out.println("Enter the title of the product from the category you wish to search for: ");
+    System.out.println("\nEnter the title of the product from the category you wish to search for: ");
     String title = scanner.nextLine();
     Product result = searching.searchByTitle(catigory,title);
+
+    if (result != null)
+      System.out.println("Product " + result.getTitle() + " was found");
+    else
+      System.out.println("No product with title " + title + " was found");
+
+    return result;
+  }
+
+  public Product searchTitleWithSuggestion()
+  {
+    System.out.println("You are now searching with word suggestion turned on");
+    Searching searching = new Searching(db);
+    WordSuggester suggester = new WordSuggester(2);
+
+    Product.ProductCategory category = DecisionHandler.getCategoryWithSuggestion(suggester, scanner);
+
+    System.out.println("\nEnter the title of the product from the category you wish to search for: ");
+    String title = scanner.nextLine();
+    title = suggester.suggest(title, scanner);
+
+    Product result = searching.searchByTitle(category,title);
 
     if (result != null)
       System.out.println("Product " + result.getTitle() + " was found");

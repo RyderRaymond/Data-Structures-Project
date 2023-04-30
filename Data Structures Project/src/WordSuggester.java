@@ -17,11 +17,8 @@ Everything else is our own code.
 
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.io.File;
-import java.util.Scanner;
-import java.util.Set;
 
 public class WordSuggester {
     private static ArrayList<String> commonWords;  //list of all words
@@ -40,7 +37,17 @@ public class WordSuggester {
 
         //adding words to the list from the file. Try/catch is for if the file is not found
         try {
-            File words = new File("Words.txt");
+            String path = "Words.txt";
+
+            //getting the root and adding ./src/ is only necessary for in intellij, should not be an issue otherwise
+            File root = new File("./");
+            for (String s : Objects.requireNonNull(root.list()))
+            {
+//                System.out.println(s);
+                if (s.equals("src"))
+                    path = "./src/" + path;
+            }
+            File words = new File(path);
             Scanner getWords = new Scanner(words);  //Scanner to read the file
 
             //add each line (each word)
@@ -54,6 +61,7 @@ public class WordSuggester {
         catch (FileNotFoundException f)
         {
             System.out.println("There was a problem reading the most common words.");
+            System.out.println(f);
             System.out.println("Please do not use search with suggestion until this is fixed.");
         }
 
@@ -62,7 +70,7 @@ public class WordSuggester {
         //add the categories in case they are not in the list already
         for (Product.ProductCategory category : Product.ProductCategory.values())
         {
-            String cat = category.toString();
+            String cat = category.toString().toLowerCase();
             if (!wordSet.contains(cat))
             {
                 wordSet.add(cat);
@@ -74,10 +82,28 @@ public class WordSuggester {
     //word suggestion based on most common words
     public String suggest(String input, Scanner scanner)
     {
-        input = input.toLowerCase();
+        String parsed = "";
 
         //if this is in the most common words, this is a real word so return it
-        if (wordSet.contains(input))
+        if (wordSet.contains(input.toLowerCase()))
+            return input;
+
+        String[] parts = parseInput(input);
+
+        for (String part : parts)
+        {
+            if (!Character.isDigit(part.charAt(0)))
+                part = autocorrectPart(part, scanner);
+            parsed += part;
+        }
+
+        System.out.println("The result of suggestion is " + parsed);
+        return parsed;
+    }
+
+    private String autocorrectPart(String input, Scanner scanner)
+    {
+        if (wordSet.contains(input.toLowerCase()))
             return input;
 
         ArrayList<String> possibleWords = new ArrayList<>();
@@ -113,16 +139,52 @@ public class WordSuggester {
         System.out.println("The input \"" + input + "\" may not be a proper English word");
         System.out.println("Possible replacements: ");
         for (String word : possibleWords)
-            System.out.print(word + ", ");
+            System.out.print(word.substring(0,1).toUpperCase() + word.substring(1) + ", ");
 
         System.out.println("\nEnter the original input \"" + input + "\" or one of the suggested words to continue:");
 
         choice = scanner.nextLine();
 
-        if (!choice.equals(input) && !wordSet.contains(choice))
-            choice = DecisionHandler.handleDecisions(choice, wordSet, scanner);
+        while (!(choice.equalsIgnoreCase(input) || wordSet.contains(choice.toLowerCase()))) {
+            System.out.println("\nEnter the original input \"" + input + "\" or one of the suggested words to continue:");
+            for (String word : possibleWords)
+                System.out.print(word.substring(0,1).toUpperCase() + word.substring(1) + ", ");
+            System.out.println();
+            choice = scanner.nextLine();
+        }
 
         return choice;
     }
-    
+
+    private String[] parseInput(String input)
+    {
+        String curr = "";
+        ArrayList<String> parts = new ArrayList<>();
+
+        for (Character c : input.toCharArray()){
+            if (c == ' ')
+            {
+                parts.add(curr);
+
+            }
+            else if (Character.isDigit(c) && (curr.length() == 0 || Character.isDigit(curr.charAt(0))))
+            {
+                curr += c;
+            }
+            else if (Character.isDigit(c) && (curr.length() > 0 && !Character.isDigit(curr.charAt(0))))
+            {
+                parts.add(curr);
+                curr = "" + c;
+            }
+            else if (!Character.isDigit(c))
+            {
+                curr += c;
+            }
+        }
+        if (curr.length() > 0)
+            parts.add(curr);
+
+        return parts.toArray(new String[0]);
+    }
+
 }
