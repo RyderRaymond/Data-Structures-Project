@@ -7,6 +7,12 @@ public class DecisionHandler{
     public static Product.ProductCategory getCategory (String task, Scanner scanner){
 //        Scanner scanner = new Scanner(System.in);
 //        categoryType();
+        System.out.print("Possible categories: ");
+        for (Product.ProductCategory c : Product.ProductCategory.values()){
+            System.out.print(String.valueOf(c) + ", ");
+        }
+        System.out.println();
+
         System.out.print("Please choose the category for " + task + ": ");
         String category = scanner.nextLine();
         category = category.toLowerCase();

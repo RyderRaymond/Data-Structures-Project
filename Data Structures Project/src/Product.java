@@ -44,6 +44,6 @@ public class Product {
 
     public String toString()
     {
-        return "Title: " + title + ", Price: $" + price + ", Date: " + listingDate;
+        return "Title: " + title + ", Category: " + category.toString() + ", Price: $" + price + ", Date: " + listingDate;
     }
 }

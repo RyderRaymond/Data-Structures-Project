@@ -18,7 +18,7 @@ public class Sorting {
     //sorts the list by date using quicksort
     public static void quickSortByDate(ArrayList<Product> list)
     {
-        quickSort(list, 0, list.size(), new ProductComparator("date"));
+        quickSort(list, 0, list.size() - 1, new ProductComparator("date"));
     }
 
     //quickSort to sort all of this list of items
