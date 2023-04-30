@@ -36,11 +36,12 @@ public class DecisionHandler{
 //                break;
             default:
                 System.out.println("That was not a valid category");
-                System.out.print("Categories: ");
+                System.out.print("Categories: [");
 
                 for (Product.ProductCategory c : Product.ProductCategory.values()){
                     System.out.print(String.valueOf(c) + ", ");
                 }
+                System.out.print("]");
                 System.out.println();
                 return getCategory(task, scanner);
         }

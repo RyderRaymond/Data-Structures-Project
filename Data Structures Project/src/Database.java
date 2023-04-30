@@ -300,39 +300,6 @@ public class Database {
     toBeDeleted = new LinkedList<Product>();
   }
 
-  //testing
-//   public ArrayList<Product> getProductList(Product p)
-//   {        
-//     //Initializes as jeansPrices so java does not get mad that list may not be initialized
-//         ArrayList<Product> list = Jeans;
-
-//         switch (p.category) {
-//             case Jeans:
-//                 list = jeansPrices;
-//                 break;
-//             case Shirt:
-//                 list = shirtPrices;
-//                 break;
-//             case TShirt:
-//                 list = tShirtPrices;
-//                 break;
-//             case Shorts:
-//                 list = shortsPrices;
-//                 break;
-//             case Hat:
-//                 list = hatPrices;
-//                 break;
-//             case Shoes:
-//                 list = shoesPrices;
-//                 break;
-//             case Jacket:
-//                 list = jacketPrices;
-//                 break;
-//         }
-
-//       return list;
-//   }
-
 
   //returns the list of this product category sorted by price
   public ArrayList<Product> getPricesList(String productType)
@@ -543,5 +510,45 @@ public class Database {
         }
     }
 
+    public void PrintAllProducts(){
+
+        LinkedHashMap<String, Product> productMap = jeansMap;
+        int counter = 6;
+        for (int count= 0; count <= counter; count++)
+        {
+            switch (count) {
+                case 0:
+                    productMap = jeansMap;
+                    break;
+                case 1:
+                    productMap = shirtMap;
+                    break;
+                case 2:
+                    productMap = tShirtMap;
+                    break;
+                case 3:
+                    productMap = shortsMap;
+                    break;
+                case 4:
+                    productMap = hatMap;
+                    break;
+                case 5:
+                    productMap = shoesMap;
+                    break;
+                case 6:
+                    productMap = jacketMap;
+                    break;
+                default:
+            }
+
+            // Iterate through the productMap and display the product details.
+            String productTitle = "";
+            for (String key : productMap.keySet()) {
+                Product product = productMap.get(key);
+                System.out.println(product.getTitle() + " - " + product.getPrice() + " - " + product.getListingDate());
+                productTitle = product.getTitle();
+            }
+        }
+    }
 
 }

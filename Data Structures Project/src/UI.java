@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 
 public class UI
@@ -33,13 +34,13 @@ public class UI
     //so the 3 quoted comments do not work for me 
     //i simply do a quick change to test
     System.out.println //("THE CODE CODE STARTS HERE");
-            ("------------------------------------------\n" +
-                    "Welcome to the Designer Clothing Shop!!\n" +
-                    "-------Shop Created By-------\n" +
-                    "------Jefferson Cajuste------\n" +
-                    "-------Michael Doyle--------\n" +
-                    "-------Ryder Raymond-------\n" +
-                    "------------------------------------------");
+            ("-----------------------------------------\n" +
+                    "|Welcome to the Designer Clothing Shop!!|\n" +
+                    "|----------- Shop Created By -----------|\n" +
+                    "|---------- Jefferson Cajuste ----------|\n" +
+                    "|------------ Michael Doyle ------------|\n" +
+                    "|------------ Ryder Raymond ------------|\n" +
+                    "-----------------------------------------");
 
     System.out.println("Within this clothing shop you will be able to complete several actions.");
   }
@@ -66,7 +67,7 @@ public class UI
       else
         System.out.println(currentSelection);
 
-      System.out.println("What would you like to do?: ");
+      System.out.print("What would you like to do?: ");
 
       choice = scanner.nextLine();
 
@@ -87,12 +88,22 @@ public class UI
           currentSelection = sort();
           break;
         case "print":
+          currentSelection = print();
           break;
         case "exit":
           return false;
       }
     }
   }
+
+/*---START OF PRINT--- */
+  public Product print(){
+    Database db = new Database();
+    db.PrintAllProducts();
+    return null;
+  }
+/*---END OF PRINT--- */
+
 
 /*---START OF SEARCHING--- */
   public Product search()
@@ -314,17 +325,16 @@ public class UI
   //public ArrayList<Product> priceSort(){
   public Product priceSort(){
     System.out.println("You are now Sorting by Price.");
-    // DecisionHandler decisionHandler = new DecisionHandler();
-    // Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
+    DecisionHandler decisionHandler = new DecisionHandler();
+    Product.ProductCategory catigory = decisionHandler.getCategory("Sorting", scanner);
+    Sorting grab = new Sorting();
+    LinkedHashMap<String, Product> grabbedProducts = grab.catigoryMap(catigory);
 
-    // ArrayList<Product> products = new ArrayList<Product>();
-    // for (Product p : Product.ProductCategory) {
-    //   if (p.getProducts() == category) {
-    //       products.add(p);
-    //   }
-    // }
-    // Sorting.quickSortByPrice(products);
-    //return products;
+    ArrayList<Product> products = new ArrayList<Product>();
+    for (Product p : grabbedProducts.values()) {
+        products.add(p);
+    }
+    Sorting.quickSortByPrice(products);
     return null;
   }
 

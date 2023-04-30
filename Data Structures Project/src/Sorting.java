@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.LinkedHashMap;
+
 
 /*
 Class that handles all sorting
@@ -101,8 +103,44 @@ public class Sorting {
         }
     }
 
+    // The searchAllItems method searches and displays all items of a given category.
+    public LinkedHashMap<String, Product> catigoryMap (Product.ProductCategory category) {
+        // LinkedHashMap is a hash table implementation with predictable iteration order.
+        // Here, it is used to store products of a specific category.
+        Database db = new Database();
+        LinkedHashMap<String, Product> productMap;
 
+        // Switch statement to determine which category of products to search.
+        switch (category) {
+            case Jeans:
+                productMap = db.jeansMap;
+                break;
+            case Shirt:
+                productMap = db.shirtMap;
+                break;
+            case TShirt:
+                productMap = db.tShirtMap;
+                break;
+            case Shorts:
+                productMap = db.shortsMap;
+                break;
+            case Hat:
+                productMap = db.hatMap;
+                break;
+            case Shoes:
+                productMap = db.shoesMap;
+                break;
+            case Jacket:
+                productMap = db.jacketMap;
+                break;
+            default:
+                // Use the DecisionHandler class to get a valid category input.
+                //category = DecisionHandler.getCategory("Searching", scanner);
+                return catigoryMap(category);
+        }
 
+        return productMap;
 
+    }
 
 }
