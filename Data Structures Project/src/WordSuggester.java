@@ -139,7 +139,13 @@ public class WordSuggester {
         System.out.println("The input \"" + input + "\" may not be a proper English word");
         System.out.println("Possible replacements: ");
         for (String word : possibleWords)
-            System.out.print(word.substring(0,1).toUpperCase() + word.substring(1) + ", ");
+        {
+            if (word.length() < 2)
+                System.out.print(word + ", ");
+            else
+                System.out.print(word.substring(0,1).toUpperCase() + word.substring(1) + ", ");
+
+        }
 
         System.out.println("\nEnter the original input \"" + input + "\" or one of the suggested words to continue:");
 
@@ -147,8 +153,12 @@ public class WordSuggester {
 
         while (!(choice.equalsIgnoreCase(input) || wordSet.contains(choice.toLowerCase()))) {
             System.out.println("\nEnter the original input \"" + input + "\" or one of the suggested words to continue:");
-            for (String word : possibleWords)
-                System.out.print(word.substring(0,1).toUpperCase() + word.substring(1) + ", ");
+            for (String word : possibleWords){
+                if (word.length() < 2)
+                    System.out.print(word + ", ");
+                else
+                    System.out.print(word.substring(0,1).toUpperCase() + word.substring(1) + ", ");
+            }
             System.out.println();
             choice = scanner.nextLine();
         }
