@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.io.File;
 import java.util.Scanner;
+import java.util.Set;
 
 public class WordSuggester {
     private static ArrayList<String> commonWords;  //list of all words
@@ -70,10 +71,12 @@ public class WordSuggester {
         }
     }
 
+    //word suggestion based on most common words
     public String suggest(String input, Scanner scanner)
     {
         input = input.toLowerCase();
 
+        //if this is in the most common words, this is a real word so return it
         if (wordSet.contains(input))
             return input;
 
@@ -81,23 +84,27 @@ public class WordSuggester {
         int differences = 0;
         String choice;
 
+        //compare the input to all common words
         for (String word : commonWords)
         {
-            differences = 0;
+            differences = 0;  //number of differences between the two
 
-            if (word.length() != input.length()) continue;
+            if (word.length() != input.length()) continue;  //only compare words that are the same length for simplicity
 
+            //compare each character at the same position in both words
             for (int i = 0; i < input.length(); i++)
             {
                 char inputChar = input.charAt(i);
                 char secondChar = word.charAt(i);
-                if (inputChar != secondChar)
+
+                if (inputChar != secondChar)  //increase differences if the two characters are not the same
                     differences++;
 
-                if (differences > max_diff)
+                if (differences > max_diff)  //if there are too many differences, this is not likely the word they meant to use
                     break;
             }
 
+            //only add words that may be the word they meant to use (not too many differences)
             if (differences <= max_diff)
                 possibleWords.add(word);
 
@@ -112,9 +119,10 @@ public class WordSuggester {
 
         choice = scanner.nextLine();
 
-        if (!choice.equals(input))
-            choice = DecisionHandler.handleDecisions(choice, possibleWords.toArray(String[0]), scanner);
+        if (!choice.equals(input) && !wordSet.contains(choice))
+            choice = DecisionHandler.handleDecisions(choice, wordSet, scanner);
 
+        return choice;
     }
-
+    
 }

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="067d2246-6ce2-441e-84b5-102c9b9a1c8c" name="Changes" comment="" />
+    <list default="true" id="067d2246-6ce2-441e-84b5-102c9b9a1c8c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WordSuggester.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WordSuggester.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -80,22 +83,22 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Database.java</url>
-          <line>476</line>
+          <line>443</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Database.java</url>
-          <line>462</line>
+          <line>429</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Database.java</url>
-          <line>460</line>
+          <line>427</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Database.java</url>
-          <line>486</line>
+          <line>453</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
