@@ -449,7 +449,7 @@ public class UI
 
   /*---START OF PRINTING--- */
 
-  public void print()
+  public Product print()
   {
     System.out.println("You are now printing");
     String choice;
@@ -487,6 +487,7 @@ public class UI
       case "exit":
         break;
     }
+    return null;
   }
 
   public void printAll() {
